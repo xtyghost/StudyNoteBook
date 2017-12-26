@@ -1,0 +1,5 @@
+### 三大框架整个理论
+
+Spring与Struts2整合就是将Action对象交给Spring容器负责创建
+
+Spring与Hibernate整合就是将sessionFactory交给Spring负责,Spring负责session维护以及AOP事务
