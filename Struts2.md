@@ -241,6 +241,43 @@ public 对象类型 getModel() {
 }
 ```
 
+### OGNL表达式
+
+ognl : 对象视图导航语言
+
+#### OgnlContext
+
+构成
+
++ root : 任何对象, ognlContext.setRoot(对象名);
++ Context : Map, ognlContext.setValues(Map);
+
+#### 取值语法
+
+```java
+// 取值
+Ognl.getValue(ognl表达式,OgnlContext,root);
+// 取出root中的对象属性
+属性
+// 给root中的对象属性赋值
+属性='值'
+// 调用root中的对象的方法
+方法名()
+// 取出context中的对象的属性
+#键.属性名
+#键.属性名='值'
+#键.方法名()
+// 获取静态属性及方法
+@全类名@属性名
+@全类名@方法名
+// 创建list对象
+{值1,值2,...}
+// 创建map对象
+#{键1:值1,键2:值2,...}
+```
+
+
+
 ### 拦截器Interceptor
 
 生命周期 : 整个项目
