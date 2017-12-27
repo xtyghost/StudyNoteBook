@@ -194,7 +194,15 @@ ActionSupport类实现了Validateable , validationAware , TextProvider , LocaleP
 | ValueStack       | 值栈                  |
 | ...              | ...                 |
 
+#### request.getAttribute()查找顺序
+
+1. 原生request
+2. 查找ValueStack的root
+3. 查找ValueStack的Context
+
 ### Struts2获得参数
+
+使用ognl从栈中获取属性并赋值
 
 #### 属性驱动获得参数
 
@@ -252,10 +260,9 @@ ognl : 对象视图导航语言
 + root : 任何对象, ognlContext.setRoot(对象名);
 + Context : Map, ognlContext.setValues(Map);
 
-#### 取值语法
+#### 语法
 
 ```java
-// 取值
 Ognl.getValue(ognl表达式,OgnlContext,root);
 // 取出root中的对象属性
 属性
@@ -263,18 +270,33 @@ Ognl.getValue(ognl表达式,OgnlContext,root);
 属性='值'
 // 调用root中的对象的方法
 方法名()
+
 // 取出context中的对象的属性
 #键.属性名
 #键.属性名='值'
 #键.方法名()
+
 // 获取静态属性及方法
 @全类名@属性名
 @全类名@方法名
+
 // 创建list对象
 {值1,值2,...}
 // 创建map对象
 #{键1:值1,键2:值2,...}
 ```
+
+### OGNL与Struts2结合
+
+Struts2为ognl提供了OgnlContext,为ValueStack(值栈);
+
+值栈获取 : ActionContext.getContext().getValueStack()
+
++ OgnlContext : ValueStack
+  + root : 栈
+  + Context : ActionContext
+
+![Ognl&Struts2](/Users/zhangaochong/Library/Mobile Documents/com~apple~CloudDocs/StudyNoteBook/image/Ognl&Struts2.png)
 
 
 
