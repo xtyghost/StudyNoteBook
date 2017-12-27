@@ -234,7 +234,7 @@ session.close();
 
 三种状态转换图
 
-![Hibernate中对象状态](/Users/zhangaochong/Library/Mobile Documents/iCloud~com~coderforart~iOS~MWeb/Documents/image/Hibernate中对象状态.jpg)
+![Hibernate中对象状态](image/Hibernate中对象状态.png)
 
 ### Hibernate缓存与快照
 
@@ -242,7 +242,7 @@ session.close();
 查询时 : 第一次查询时,会将对象放入缓存,再次查询会返回缓存中的,不再查询数据库
 修改时 : 使用快照对比修改前和后对象的区别,只执行一次修改
 
-![Hibernate缓存与快照](/Users/zhangaochong/Library/Mobile Documents/iCloud~com~coderforart~iOS~MWeb/Documents/image/Hibernate缓存与快照.jpg)
+![Hibernate缓存与快照](image/Hibernate缓存与快照.png)
 
 ### 多表操作
 

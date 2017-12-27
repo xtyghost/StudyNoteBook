@@ -89,7 +89,7 @@ result : 结果配置
 
 ### Struts2访问流程和架构
 
-![Struts2访问流程和架构](/Users/zhangaochong/Library/Mobile Documents/iCloud~com~coderforart~iOS~MWeb/Documents/image/Struts2访问流程和架构.jpg)
+![Struts2访问流程和架构](image/Struts2访问流程和架构.png)
 
 ### 动态方法调用
 
@@ -296,9 +296,7 @@ Struts2为ognl提供了OgnlContext,为ValueStack(值栈);
   + root : 栈
   + Context : ActionContext
 
-![Ognl&Struts2](/Users/zhangaochong/Library/Mobile Documents/com~apple~CloudDocs/StudyNoteBook/image/Ognl&Struts2.png)
-
-
+![Ognl&Struts2](image/Ognl&Struts2.png)
 
 ### 拦截器Interceptor
 
