@@ -146,6 +146,10 @@ ActionSupport类实现了Validateable , validationAware , TextProvider , LocaleP
 ### 结果跳转方式
 
 ```xml
+<!--定义全局结果集-->
+<global-results>
+	<result name="success" type="方式">地址</result>
+</global-results>
 <!-- 转发 -->
 <action name="action名" class="action类名" method="action方法名">
 	<result name="success" type="dispatcher">转发地址</result>
@@ -293,7 +297,7 @@ Struts2为ognl提供了OgnlContext,为ValueStack(值栈);
 值栈获取 : ActionContext.getContext().getValueStack()
 
 + OgnlContext : ValueStack
-  + root : 栈
+  + root : 栈当前访问的Action对象
   + Context : ActionContext
 
 ![Ognl&Struts2](image/Ognl&Struts2.png)
@@ -319,12 +323,12 @@ protected String doIntercept(ActionInvocation actionInvocation) throws Exception
     // 前处理
   	
     // 放行
-    actionInvocation.invoke();
+    String result = actionInvocation.invoke();
   
     // 后处理
   
-    // 不放行时返回处理结果
-    return null;
+    // 返回处理结果
+    return result;
 }
 ```
 

@@ -1,15 +1,82 @@
+### Spring
+
+作用 : 负责管理项目中所有对象
+
 ### Spring配置
 
 applicationContext.xml
 
 ```xml
 <beans>
-    <!--  vscope属性 -->
+    <!-- scope属性 -->
     <!-- singleton : 单例对象 (默认) -->
     <!-- prototype : 多例,整合struts2时ActionBean必须配置为多例 -->
     <bean name="对象名" class="对象类名" scope="prototype"></bean>
+    <!-- 引入其他配置文件 -->
+    <import resource="其他配置文件"/>
 </beans>
 ```
+
+### 管理容器在项目中的生命周期
+
+```xml
+<!-- 配置Spring容器随项目启动创建,项目关闭销毁 -->
+<listener>
+	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+</listener>
+<!-- 指定加载Spring配置文件的位置 -->
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>classpath:applicationContext.xml</param-value>
+</context-param>
+```
+
+### 获取容器
+
+```java
+// 获得ServletContext对象
+ServletContext sc = ServletActionContext.getServletContext();
+// 从ServletContext获得webApplicationContext对象
+WebApplicationContext ac = WebApplicationContextUtils.getWebApplicationContext(sc);
+```
+
+### 获取容器中对象
+
+```java
+// 创建容器对象
+ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+// 获得容器中对象
+ac.getBean(对象名);
+```
+
+### IOC&DI
+
+IOC : Inverse Of Control 反转控制,反转了对象的创建方式,由Spring完成创建及注入
+
+DI : Dependency Injection 依赖注入
+
+注入方式 
+
++ set方法注入
++ 构造方法注入
++ 字段注入
+
+注入类型
+
++ 值类型注入
++ 引用类型注入
+
+### BeanFactory&ApplicationContext
+
+#### BeanFactory
+
++ spring原始接口,实现类功能较为单一
++ 实现类特点是每次获得对象时才会创建对象
+
+#### ApplicationContext
+
++ 每次容器启动是就会创建容器中配置的所有对象
++ 提供更多功能
 
 ### Spring属性注入
 
@@ -52,7 +119,7 @@ List
 
 ```xml
 <property name="list名">
-	<lsit>
+	<list>
 		<value>值</value>
         <ref bean="值"/>
 	</list>
@@ -149,7 +216,7 @@ public class Demo {
 #### SpringAOP名词
 
 + Joinpoint (接入点) : 目标对象中,所有可以增强的方法
-+ Pointcut (切入点) : 目标对象,要增强的方法
++ Pointcut (切入点) : 目标对象要增强的方法
 + Advice (通知/增强) : 增强的代码
 + Target (目标对象) : 被代理对象
 + Weaving (织入) : 将通知应用到切点的过程
@@ -164,17 +231,56 @@ public class Demo {
 + 异常拦截通知 : 出现异常调用
 + 后置通知 : 目标方法运行之后调用
 
+```java
+public class MyAdvice {
+
+    // 前置通知
+    public void before(){
+        System.out.println("before...");
+    }
+    // 后置通知，出现异常不调用
+    public void afterReturning(){
+        System.out.println("afterReturning...");
+    }
+    // 环绕通知
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
+        System.out.println("around before...");
+        // 调用目标方法
+        Object proceed = pjp.proceed();
+        System.out.println("around after...");
+        return proceed;
+    }
+    // 异常拦截通知
+    public void afterException(){
+        System.out.println("afterException...");
+    }
+    // 后置通知
+    public void after(){
+        System.out.println("after...");
+    }
+}
+```
+
+
+
 #### XML配置AOP
 
 ```xml
+<!-- 配置目标对象 -->
+<bean name="目标对象名" class="全类名"/>
+<!-- 配置通知对象 -->
+<bean name="通知对象名" class="全类名"/>
 <!-- 将通知织入目标对象 -->
 <aop:config>
 	<!-- 配置切入点 -->
 	<aop:pointcut expression="execution(切点表达式)" id="切入点名"/>
 	<!-- 配置切面(手动指定通知方法) -->
 	<aop:aspect ref="通知名">
-		<!-- 配置前置通知 -->	             <!-- 指定切入点 -->
 		<aop:befor method="前置通知方法名" pointcut-ref="切入点名"/>
+      	<aop:after-returning method="前置通知方法名" pointcut-ref="切入点名"/>
+        <aop:around method="后置通知方法名" pointcut-ref="切入点名"/>
+        <aop:after-throwing method="异常通知方法名" pointcut-ref="切入点名"/>
+        <aop:after method="后置通知方法名" pointcut-ref="切入点名"/>
 	</aop:aspect>
 	<!-- 配置切面 -->
 	<aop:advisor advice-ref="通知名" pointcut-ref="切入点名"/>
@@ -190,4 +296,28 @@ void 包名.类名.方法名()
 * 包名.类名.*(..)
 * 包名.*类名.*(..)
 ```
+
+### 注解配置AOP
+
+```xml
+<!-- 开启使用注解完成织入 -->
+<aop:aspectj-autoproxy/>
+```
+
+```java
+// 配置通知类
+@Aspect
+// 配置前置通知
+@Before("execution(execution(切点表达式))")
+// 配置后置通知(出现异常不调用)
+@AfterReturning("execution(execution(切点表达式))")
+// 配置环绕通知
+@Around("execution(execution(切点表达式))")
+// 配置异常拦截通知
+@AfterThrowing("execution(execution(切点表达式))")
+// 配置后置通知
+@After("execution(execution(切点表达式))")
+```
+
+### Spring中的事务
 
