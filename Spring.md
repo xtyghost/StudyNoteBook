@@ -321,3 +321,11 @@ void 包名.类名.方法名()
 
 ### Spring中的事务
 
+PlatformTransactionManager接口
+
+#### xml配置
+
+```xml
+
+```
+

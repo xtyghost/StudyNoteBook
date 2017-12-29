@@ -55,7 +55,7 @@ byte 字节 = 8个二进制位
 
 ### 变量
 
-![Java数据类型](/Users/zhangaochong/Library/Mobile Documents/iCloud~com~coderforart~iOS~MWeb/Documents/image/Java数据类型.png)
+![Java数据类型](image/Java数据类型.png)
 
 ### 算数运算符
 
