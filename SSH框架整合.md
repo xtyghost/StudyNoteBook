@@ -81,7 +81,7 @@ applicationContext.xml
 
 ### Spring的AOP事务
 
-配置核心事务管理器
+#### 配置核心事务管理器
 
 ```xml
 <!--配置核心事务管理器-->
@@ -90,6 +90,49 @@ applicationContext.xml
 </bean>
 ```
 
+#### xml配置事务
 
+```xml
+<!--配置通知-->
+<tx:advice id="txAdvice">
+	<tx:attributes>
+		<tx:method name="save*" isolation="REPEATABLE_READ"/>
+    </tx:attributes>
+</tx:advice>
 
-注解配置AOP事务
+<!--配置将通知织入目标对象-->
+<aop:config>
+	<!--配置切点-->
+    <aop:pointcut id="txPc" expression="execution(* com.aochong.service.impl.*ServiceImpl.*(..))"/>
+    <!--配置切面-->
+    <aop:advisor advice-ref="txAdvice" pointcut-ref="txPc"/>
+</aop:config>
+```
+
+#### 注解配置事务
+
+```xml
+<!--开启注解事务-->
+<tx:annotation-driven/>
+```
+
+```java
+@Transactional(isolation = Isolation.REPEATABLE_READ,propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+```
+
+#### 扩大session作用范围
+
+web.xml
+
+```xml
+<!--扩大session作用范围-->
+<filter>
+	<filter-name>openSessionInView</filter-name>
+    <filter-class>org.springframework.orm.hibernate5.support.OpenSessionInViewFilter</filter-class>
+</filter>
+<filter-mapping>
+	<filter-name>openSessionInView</filter-name>
+	<url-pattern>/*</url-pattern>
+</filter-mapping>
+```
+
