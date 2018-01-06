@@ -154,7 +154,7 @@ Properties
 
 ```xml
 <!-- 扫描指定包下所有注解,包括子包 -->
-<context:component-scan base-package="包名"></context:component-scan>
+<context:component-scan base-package="包名"/>
 ```
 
 类中使用
@@ -166,6 +166,7 @@ Properties
 @Service("对象名") // 用于service层
 @Controller("对象名") // 用于web层
 @Repository("对象名") // 用于dao层
+// 对象名不指定默认为类名首字母小写
 // 相当于<bean name="对象名" class="对象类名"/>
 
 @Scope(scopeName = "prototype") //指定scope属性
@@ -318,14 +319,3 @@ void 包名.类名.方法名()
 // 配置后置通知
 @After("execution(execution(切点表达式))")
 ```
-
-### Spring中的事务
-
-PlatformTransactionManager接口
-
-#### xml配置
-
-```xml
-
-```
-

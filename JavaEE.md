@@ -1,3 +1,11 @@
+### HTTP协议
+
+应用层协议
+
++ Http1.0 响应完成后连接直接断开
++ Http1.1 keep-alive 可以在一段时间内保持连接不断开,多次请求按顺序响应
++ Http2.0 多路复用 对http头进行压缩
+
 ### Servlet
 
 #### servlet规范
@@ -100,7 +108,7 @@ removeAttribute(String name);
 // 设置状态码
 setStatus(302);
 /*
- * 常见状态吗
+ * 常见状态码
  * 200 正常
  * 302 重定向
  * 304 拿本地缓存
