@@ -1,6 +1,8 @@
 ### HTTP协议
 
-应用层协议
+应用层协议,无连接无状态
+
+#### Http协议版本
 
 + Http1.0 响应完成后连接直接断开
 + Http1.1 keep-alive 可以在一段时间内保持连接不断开,多次请求按顺序响应
@@ -8,13 +10,32 @@
 
 ### Servlet
 
-#### servlet规范
+#### 定义
 
-1. servlet技术
-2. filter技术
-3. listener技术
+运行在服务端的Java小程序，SUN公司规范接口，处理客户端请求响应
 
-#### servlet的API和生命周期
+#### 三大组件
+
+1. servlet
+2. filter 过滤器
+3. listener 监听器
+
+#### 实现
+
+1. 创建类实现Servlet接口
+2. 实现未实现方法
+3. 在web.xml进行配置
+
+#### 方法
+
+1. init : servlet对象创建时执行
+2. service : 每次请求都会执行
+3. destroy : servlet销毁时执行
+
+#### Servlet生命周期
+
+1. 创建 : 默认第一次访问时创建
+2. 销毁 : 服务器关闭时销毁
 
 ```java
 public class MyServer implements Servlet {
@@ -56,31 +77,51 @@ public class MyServer implements Servlet {
 
 ```xml
 <servlet>
-	<servlet-name>名称</servlet-name>
-  	<servlet-class>全类名</servlet-class>
+  <servlet-name>名称</servlet-name>
+  <servlet-class>全类名</servlet-class>
 </servlet>
 <servlet-mapping>
-	<servlet-name>名称</servlet-name>
-  	<!--完全匹配-->
-  	<url-pattern>/虚拟路径</url-pattern>
-  	<!--目录匹配-->
-  	<url-pattern>/虚拟路径/*</url-pattern>
+  <servlet-name>名称</servlet-name>
+  <url-pattern>虚拟路径</url-pattern>
 </servlet-mapping>
 ```
 
+##### url-pattern配置方式
+
+1. 完全匹配
+2. 目录匹配 : 虚拟路径/*
+3. 扩展名匹配 : *.扩展名
+4. 缺省配置 : / 当没有匹配时默认访问
+  2与3不能混用
+
+优先级 : 完全匹配 > 目录匹配 > 扩展名匹配
+
+##### 配置服务器启动时创建对象
+
+`<load-on-startup>3</load-on-start>`
+
 web应用中所有的资源的响应都是servlet负责，包括静态资源。
+
+#### Servlet3.0配置
+
+```java
+@WebServlet(
+  name = "类名",
+  urlPatterns = {"虚拟路径"},
+  loadOnstart = 3;
+)
+```
 
 ### ServletContext
 
 #### 定义
 
-ServletContext是一个web应用的环境（上下文）对象，一个web应用只有一个。
+代表一个web应用的环境（上下文）对象，内部封装web应用信息，一个web应用只有一个ServletContext对象，有多个Servlet对象
 
 ##### 生命周期
 
-​	创建：web应用被加载
-
-​	销毁：web应用被卸载
+​	创建 : 该web应用被加载（服务器开启）
+​	销毁 : web应用被卸载 （服务器关闭）
 
 #### 获取
 
@@ -90,6 +131,15 @@ ServletContext servletContext = config.getServletContext();
 // 2.
 ServletContext servletContext = this.getServletContext();
 ```
+
+#### ServletContext作用
+
+1. 获得web应用全局的初始化参数
+  getInitParameter()
+2. 获得web应用中任何资源的绝对路径（重要）
+  getRealPath(相对路径)
+3. ServletContext是一个域对象（重要）
+  作用范围 : 整个web应用，所有的web资源都可以随意向ServletContex域中存取数据，数据可以共享。
 
 ### 域对象
 
