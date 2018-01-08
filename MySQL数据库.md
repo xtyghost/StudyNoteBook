@@ -46,7 +46,7 @@ drop database 数据库名;
 use 数据库名;
 
 /* 查看当前所在数据库*/
-select database()
+select database();
 ```
 
 ### 表操作
@@ -63,14 +63,20 @@ create table 表名(
 drop table 表名;
 
 /*约束*/
-primary key 主键约束
-auto_increment 自动增长
-not null 非空
+primary key -- 主键约束
+auto_increment -- 自动增长
+not null -- 非空约束
+unique key -- 唯一约束
+default 值 -- 默认值
+foreign key -- 外键约束
 
 /*查看表*/
 show tables;
+/*查看指定数据库表*/
+show tables from 数据库名;
 
 /*查看表结构*/
+show columns from 表名;
 desc 表名;
 
 /*修改表名*/
@@ -98,7 +104,7 @@ alter table 表名 drop 列名;
 ```mysql
 /*添加数据*/
 insert into 表名 (列名1,列名2,列名3) values (值1,值2,值3);	-- 可以省略主键
-insert into 表名 values (值1,值2,值3); -- 不可以省略主键
+insert into 表名 values (值1,值2,值3); -- 不可以省略主键,可以为null,default
 
 /*批量添加数据*/
 insert into 表名 values (列名1,列名2) values (值1,值2),(值1,值2);
@@ -176,10 +182,21 @@ max(列名) -- 求最大值
 min(列名) -- 求最小值
 avg(列名) -- 求平均值
 
+/*字符函数*/
+concat(列名1,列名2,...) -- 字符连接
+concat_ws(分隔符,列名1,列名2...) -- 指定分隔符连接字符
+
+/*其他函数*/
+round(avg(列名),小数位数) -- 对平均值四舍五入
+
 /*分组查询*/
-group by 列名
+group by 列名;
 
 /*分组查询后筛选*/
 group by 列名 having 条件;
+
+/*限制查询数量*/
+limit 数量;
+limit 起始,结束;
 ```
 
