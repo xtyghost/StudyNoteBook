@@ -44,6 +44,9 @@ drop database 数据库名;
 
 /*使用数据库*/
 use 数据库名;
+
+/* 查看当前所在数据库*/
+select database()
 ```
 
 ### 表操作
