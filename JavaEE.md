@@ -135,10 +135,18 @@ ServletContext servletContext = this.getServletContext();
 #### ServletContext作用
 
 1. 获得web应用全局的初始化参数
-  getInitParameter()
+   `getInitParameter()`
+
 2. 获得web应用中任何资源的绝对路径（重要）
-  getRealPath(相对路径)
-3. ServletContext是一个域对象（重要）
+  `getRealPath(相对路径)` 该api不同的web容器实现不同
+
+  `this.getClass.getClassLoader.getResource(文件).getPath()` 所有web服务器通用
+
+3. 获得文件MIME类型
+
+   getMimeType(文件名)
+
+4. ServletContext是一个域对象（重要）
   作用范围 : 整个web应用，所有的web资源都可以随意向ServletContex域中存取数据，数据可以共享。
 
 ### 域对象
@@ -203,6 +211,10 @@ response.setContentType("text/html;charset=utf-8");
 // 2.
 response.setCharacterEncoding("utf-8");
 ```
+
+### URL编码
+
+将中文进行getBytes编码,得到字节数组,将每个字节转成十六进制,将每个十六进制用%号拼接
 
 ### 文件下载
 
