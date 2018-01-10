@@ -342,6 +342,12 @@ cookie.setMaxAge(秒);
 // 设置携带路径,默认为该cookie所在资源的路径
 cookie.setPath(路径);	
 
+// 设置跨子域共享
+cookie.setDomain(".二级域名.一级域名");
+
+// 防止xss攻击
+cookie.setHttpOnly();
+
 // 4.删除Cookie
 // 发送同名同携带路径储存时间为0Cookie
 ```
@@ -365,7 +371,7 @@ request.getSession()
 
 ##### session生命周期
 
-创建：第一次执行request.getSession()时差创建
+创建：第一次执行request.getSession()时创建
 
 销毁：1. 服务器（非正常）关闭时
 
@@ -383,6 +389,8 @@ request.getSession()
    ` session.invalidate(); `
 
 ### JSP
+
+第一次访问时翻译成Servlet
 
 #### jsp脚本
 
