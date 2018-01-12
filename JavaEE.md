@@ -358,6 +358,10 @@ cookie.setHttpOnly();
 
 借助cookie存储JSESSIONID
 
+##### Session作用范围
+
+默认一次会话
+
 ##### 获取方法
 
 ```java
@@ -373,9 +377,9 @@ request.getSession()
 
 创建：第一次执行request.getSession()时创建
 
-销毁：1. 服务器（非正常）关闭时
-
-    	   2. session 过期/失效（默认30分钟），从不操作服务端的资源开始计时。
+销毁：
+1. 服务器（非正常）关闭时
+2. session 过期/失效（默认30分钟），从不操作服务端的资源开始计时。
 
 ```xml
 <!-- 配置session过期时间 web.xml -->
