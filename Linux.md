@@ -160,8 +160,6 @@ shutdown -h 20:20 # 20:20关机
 shutdown -h +20 # 20分钟后关机
 ```
 
-###
-
 #### 输出重定向
 
 ```shell
@@ -221,7 +219,7 @@ scp 用户名@主机地址:文件 本地目录
 -r # 整个目录
 ```
 
-#### 开放端口
+#### 防火墙配置
 
 ```shell
 # 开放3306端口
@@ -229,6 +227,11 @@ scp 用户名@主机地址:文件 本地目录
 
 # 将修改永久保存到防火墙
 /etc/rc.d/init.d/iptables save
+
+# 关闭防火墙
+service iptables stop
+# 永久关闭,开机不启动防火墙
+chkconfig iptables off
 ```
 
 #### rpm安装软件
