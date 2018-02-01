@@ -22,6 +22,7 @@ redis.conf
 ./redis-server redis.conf
 # 关闭
 ./redis-cli shutdown
+# 默认端口号6379
 ```
 
 ### 常用命令
@@ -92,6 +93,8 @@ ttl 键名 # 查询过期时间 -1 未设置过期时间 -2 不存在键
 
 ### Redis集群
 
+#### 搭建集群
+
 至少有三个节点,每个节点有一个备份机,至少需要6台服务器.
 
 1. 修改每个Redis配置文件redis.conf中` cluster-enabled yes `
@@ -99,11 +102,55 @@ ttl 键名 # 查询过期时间 -1 未设置过期时间 -2 不存在键
 3. 安装ruby` yum install ruby `
 4. 安装ruby包管理器` yum install rubygems `
 5. 安装redis库` gem install redis-3.0.0 `
-6. 运行ruby脚本
+6. 运行ruby脚本(在任意一台服务器上执行)
 
 ```shell
 # create 创建集群
 # replicas 1 每个节点1个备份机
 ./redis-trib.rb create --replicas 1 节点列表
+```
+
+#### 连接集群
+
+` redis-cli -p 端口号 -c `
+
+### Jedis使用
+
+```java
+// 创建jedis对象
+Jedis jedis = new Jedis(地址, 端口号);
+// 设置值
+jedis.set(键,值);
+// 取值
+String str = jedis.get(键);
+// 关闭连接
+jedis.close();
+```
+
+#### Jedis连接池
+
+```java
+// 创建连接池对象
+JedisPool jedisPool = new JedisPool(地址, 端口号);
+// 从连接池中获得连接
+Jedis resource = jedisPool.getResource();
+// 关闭连接,连接池回收资源
+resource.close();
+// 关闭连接池
+jedisPool.close();
+```
+
+#### JedisCluster连接集群
+
+```java
+// 创建连接节点集合
+Set<HostAndPort> nodes = new HashSet<>();
+// 添加多个连接
+nodes.add(new HostAndPort(地址, 端口号);
+// ...
+// 创建JedisCluster对象操作redis
+JedisCluster jedisCluster = new JedisCluster(nodes);
+// 关闭JedisCluster对象
+jedisCluster.close();
 ```
 
