@@ -112,10 +112,10 @@ insert into 表名 values (列名1,列名2) values (值1,值2),(值1,值2);
 /*修改数据*/
 update 表名 set 列名1 = 值1,列名2 = 值2 where 条件;
 
-/*删除数据*/
+/*删除数据(可以回滚)*/
 delete from 表名 where 条件;
 
-/*重建表,auto_increment置为0*/
+/*重建表,auto_increment置为0(不能回滚)*/
 truncate table 表名;
 
 /*条件写法*/
@@ -198,5 +198,8 @@ group by 列名 having 条件;
 /*限制查询数量*/
 limit 数量;
 limit 起始,结束;
+
+/*去重*/
+select distinct 列名1,列名2
 ```
 
