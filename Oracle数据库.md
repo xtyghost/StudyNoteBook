@@ -235,3 +235,56 @@ exeception
 end;
 ```
 
+```sql
+-- 条件判断
+if 条件 then 执行语句 end if;
+if 条件 then 执行语句 else 执行语句 end if;
+if 条件 then 执行语句 elsif 条件 then 执行语句... else 执行语句 end if;
+```
+
+```sql
+-- 循环
+
+-- 无条件循环
+loop
+	循环语句
+	exit when 结束条件;
+end loop;
+
+-- 有条件循环
+while 循环条件
+loop
+	循环语句
+end loop;
+
+-- for循环
+for 变量 in 起始 .. 结束
+loop
+	循环语句
+end loop;
+```
+
+### 游标
+
+```sql
+declare
+	-- 声明游标
+	游标名 is 查询语句;
+	-- 行记录类型变量
+	变量名 表名%rowtype%;
+begin
+	-- 打开游标
+	open 游标名;
+		loop
+			-- 提取游标
+			fetch 游标名 into 变量名;
+			-- 退出循环
+			exit when 游标名%notfound;
+			-- 输出值
+			dbms_output.put_line(变量名.列名);
+		end loop;
+	-- 关闭游标
+	close 游标名;
+end;
+```
+
