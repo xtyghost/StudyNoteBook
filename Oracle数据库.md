@@ -217,9 +217,9 @@ declare
 	-- 声明变量
 	变量名 类型(长度);
 	-- 引用列类型
-	变量名 表名.列名%type%;
+	变量名 表名.列名%type;
 	-- 行记录类型
-	变量名 表名%rowtype%;
+	变量名 表名%rowtype;
 begin
 	-- 变量赋值
 	变量名:=变量值;
@@ -269,7 +269,7 @@ end loop;
 ```sql
 declare
 	-- 声明游标
-	游标名 is 查询语句;
+	cursor 游标名 is 查询语句;
 	-- 行记录类型变量
 	变量名 表名%rowtype%;
 begin
@@ -287,4 +287,105 @@ begin
 	close 游标名;
 end;
 ```
+
+```sql
+-- 带参数游标
+declare
+	-- 声明游标
+	cursor 游标名(参数名 类型) is 查询语句 where 条件=参数;
+	-- 行记录类型变量
+	变量名 表名%rowtype%;
+begin
+	-- 打开游标
+	open 游标名(参数值);
+		loop
+			-- 提取游标
+			fetch 游标名 into 变量名;
+			-- 退出循环
+			exit when 游标名%notfound;
+			-- 输出值
+			dbms_output.put_line(变量名.列名);
+		end loop;
+	-- 关闭游标
+	close 游标名;
+end;
+```
+
+```sql
+-- for循环游标
+declare
+	-- 声明游标
+	cursor 游标名 is 查询语句;
+begin
+	for 变量名 in 游标名
+	loop
+		-- 输出值
+		dbms_output.put_line(变量名.列名);
+	end loop;
+end;
+```
+
+### 存储函数
+
+```sql
+create [or replace] function 函数名 (参数名1 参数类型,参数名2 参数类型,...)
+return 结果类型
+is
+	声明变量;
+begin
+	执行语句;
+	return 结果;
+end;
+```
+
+### 存储过程
+
+```sql
+create [or replace] procedure 存储过程名 (参数名1 参数类型,参数名2 参数类型,...,传出参数 out 参数类型)
+is|as
+	声明变量;
+begin
+	执行语句;
+end;
+-- 调用(只能调用不带传出参数存储过程)
+call 存储过程名(参数1,参数2,...);
+-- 调用
+declare
+	传出参数 参数类型;
+begin
+	存储过程名(参数1,参数2,...传出参数);
+	-- 输出传出参数
+	dbms_output.put_line(传出参数);
+end;
+```
+
+### 触发器
+
++ 前置触发器
+  + 行级触发器
+  + 语句级触发器
++ 后置触发器
+  + 行级触发器
+  + 语句级触发器
+
+```sql
+create [or replace] trigger 触发器名
+	before|after
+	[delete] [[or] insert] [[or] update [of 列名]]
+	on 表名
+	[for each row] [when 条件]
+declare
+	声明语句;
+begin
+	执行语句;
+end;
+```
+
+#### 触发语句与伪记录变量
+
+|  触发语句  |    :old    |    :new    |
+| :----: | :--------: | :--------: |
+| insert | 所有字段都是null |  将要插入的数据   |
+| update |   更新前的值    |   更新后的值    |
+| delete |   删除前的值    | 所有字段都是null |
 
