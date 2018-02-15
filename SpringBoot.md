@@ -58,3 +58,38 @@ public class 属性名 {
 }
 ```
 
+### 注解
+
+```java
+@RestController
+// 相当于
+@Controller
+@RequestBody
+
+// 类上配置url
+@RequestMapping("url")
+//方法上配置多个url
+@RequestMapping(value = {"url1","url2"})
+
+@GetMapping(value = "url")
+// 相当于
+@RequestMapping(value = "url", method = RequestMethod.GET)
+```
+
+```java
+// 获取请求参数
+
+// /url/参数值
+@RequestMapping("/url/{参数名}")
+public String 方法(@PathVariable 参数类型 参数名)
+
+// /url?参数名=参数值
+@RequestMapping("/url")
+public String 方法(@RequestParam(参数名) 参数类型 变量名)
+  
+// RequestParam参数
+value 参数名
+required 是否必传(默认true)
+defaultValue 参数默认值
+```
+
