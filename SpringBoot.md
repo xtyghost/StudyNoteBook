@@ -13,7 +13,7 @@ server.context-path=路径
 
 application.yml
 
-```
+```yaml
 server:
   port: 8080
   context-path: 路径
@@ -27,7 +27,7 @@ application-配置文件2.yml
 
 application.yml
 
-```
+```yaml
 spring:
 	profiles:
 		active: 配置文件1
@@ -44,7 +44,7 @@ spring:
 private 属性类型 属性名; 
 ```
 
-```
+```yaml
 # 配置文件中获取属性
 属性名: "${属性名}"
 ```
@@ -110,6 +110,7 @@ public String 方法(@Valid 对象类型 对象名, BindingResult bindingResult)
 ```java
 // 配置主键
 @Id
+// 自增
 @GeneratedValue
 
 // 表单验证
@@ -143,5 +144,38 @@ public class ExceptionHandle {
     @ResponseBody
     public Result handle(Exception e)
 }
+```
+
+### 单元测试
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+```
+
+打包时跳过单元测试: ` mvn clean package -Dmaven.test.skip=true `
+
+### 日志
+
+```java
+private final Logger logger = LoggerFactory.getLogger(当前类.class);
+
+logger.info();
+logger.debug();
+logger.error();
+```
+
+application.yml配置
+
+```yaml
+logging:
+  pattern:
+  	# 输出格式
+    console: "%d - %msg%n"
+  file: 日志文件
+  path: 日志文件目录
+  level: 日志级别
+  	# 给单独类设置日志级别
+  	全类名: 日志级别
 ```
 
