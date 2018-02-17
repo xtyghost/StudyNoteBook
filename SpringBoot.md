@@ -58,7 +58,9 @@ public class 属性名 {
 }
 ```
 
-### 注解
+### 注解配置
+
+#### Controller类配置
 
 ```java
 @RestController
@@ -91,5 +93,55 @@ public String 方法(@RequestParam(参数名) 参数类型 变量名)
 value 参数名
 required 是否必传(默认true)
 defaultValue 参数默认值
+```
+
+```java
+// 事务
+@Transactional
+```
+
+```java
+// 表单验证
+public String 方法(@Valid 对象类型 对象名, BindingResult bindingResult)
+```
+
+#### 实体类配置
+
+```java
+// 配置主键
+@Id
+@GeneratedValue
+
+// 表单验证
+@Min(value = 最小值, message = 错误信息)
+```
+
+#### AOP配置
+
+```java
+@Aspect
+@Component
+public class HttpAspect {
+    @Before("execution(public * 拦截类.*(..))")
+    public void 方法名()
+      
+    @Pointcut("execution(public * 拦截类.*(..))")
+    public void 切点方法()
+    @Before("切点方法")
+    public void 方法名()
+    @after("切点方法")
+    public void 方法名()
+}
+```
+
+#### 统一异常处理
+
+```java
+@ControllerAdvice
+public class ExceptionHandle {
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public Result handle(Exception e)
+}
 ```
 
