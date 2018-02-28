@@ -45,11 +45,11 @@ pagckage : 将action配置封装,就是可以在package中配置多个action
 
 action : 配置action类
 + name : 决定了action访问资源名
-+ class : action完整类名
-+ method : 指定调用action中哪个方法处理请求
++ class : action完整类名,默认为com.opensymphony.xwork2.ActionSupport
++ method : 指定调用action中哪个方法处理请求,默认为execute()
 
 result : 结果配置
-+ name : 结果处理名称,与action方法返回值对应
++ name : 结果处理名称,与action方法返回值对应,默认为success
 + type : 指定调用哪个result类处理结果,默认使用转发
 + 标签体 : 页面相对路径
 
@@ -59,11 +59,12 @@ result : 结果配置
 
 + 方式一 : struts.xml中 (重点)
 
-+ 方式二 : src下创建struts.properties
-
 ```xml
 <constant name="键" value="值"></constant>
 ```
+
++ 方式二 : src下创建struts.properties
+
 
 + 方式三 : web.xml
 
