@@ -182,3 +182,109 @@ System.out.println(f1 == f2);	// false
 + 阻塞状态 (暂时让出cpu)
 + 死亡状态 (调用isAlive方法返回false)
 
+### 动态代理
+
+```java
+DemoImpl demo = new DemoImpl();
+// 创建代理对象
+Demo proxyInstance = (Demo) Proxy.newProxyInstance(
+  	// 类加载器
+  	demo.getClass().getClassLoader(),
+  	// 代理对象接口的实现类数组
+  	demo.getClass().getInterfaces(),
+  	new InvocationHandler() {
+	/**
+     * @param proxy 代理对象
+     * @param method 目标方法的字节码对象
+     * @param args 调用目标方法时的参数
+     * @return 代理对象调用方法的返回值
+     */
+  	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+		System.out.println("before");
+        Object invoke = method.invoke(demo, args);
+        System.out.println("after");
+        return invoke;
+    }
+});
+
+proxyInstance.method();
+```
+
+
+
+### [设计模式](设计模式.md)
+
+### [JVM](JVM.md)
+
+## JavaWEB
+
+### 网络模型
+
+![网络模型及协议](image/网络模型及协议.png)
+
+### Http协议
+
+应用层协议,无连接,无状态
+
+#### Http协议版本
+
++ Http1.0 : 默认使用短连接
++ Http1.1 : 默认使用长连接
++ Http2.0 : 多路复用,http头压缩
+
+#### Http请求
+
+```http
+// 请求行
+// 请求方法 请求路径 协议版本
+POST /form.html HTTP/1.1
+// 请求头(消息报头)
+Accept: text/html, image/gif, ... // 指定客户端接受类型
+Accept-Charset: iso-8859-1,gb2312 // 指定客户端接受字符集,缺省任何字符集都可以接受
+Accept-Encoding: gzip,deflate
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/604.5.6 (KHTML, like Gecko) Version/11.0.3 Safari/604.5.6 // 客户端信息
+HOST: www.demo.cn
+Content-Length: 22
+Connection: Keep-Alive
+Cache-Control: no-cache
+
+// 请求体(请求正文)
+user=zhangsan&pwd=1234
+```
+
+#### Http响应
+
+```http
+// 响应行(状态行)
+// 协议版本 状态码 状态描述
+HTTP/1.1 200 OK
+// 请求头(消息报头)
+Server: Apache-Coyote/1.1 //  服务器信息
+Last-Modified: 时间 // 资源最后修改时间
+
+// 请求体(请求正文)
+```
+
+#### Http常见状态码
+
++ 200 OK 请求成功
++ 301 Moved Permanently(永久移除) 请求的URL已移走
++ 302 Found 重定向
++ 400 Bad Request 请求语法错误,服务器不能解析
++ 403 Forbidden 服务器收到请求,但拒绝提供服务
++ 404 请求资源不存在
++ 500 Internal Server Error 服务器发生不可预期的错误
++ 503 Server Unavailable 服务器当前不能处理请求,一段时间后可能恢复
+
+#### GET和POST区别
+
+1. GET请求数据在URL之后,以?开始,多个参数用&相连
+
+   POST请求数据在请求体中
+
+2. GET请求数据大小有限制,取决于浏览器对URL长度的限制
+
+   POST对请求数据没有限制
+
+3. POST安全性比GET高
