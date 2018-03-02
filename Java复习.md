@@ -288,3 +288,75 @@ Last-Modified: 时间 // 资源最后修改时间
    POST对请求数据没有限制
 
 3. POST安全性比GET高
+
+#### 重定向和转发的区别
+
+1. 重定向两次请求,地址栏变化
+
+   转发一次请求,地址栏不变
+
+2. 重定向可以访问外部网站
+
+   转发只能访问内部资源
+
+3. 重定向传输的数据会丢失
+
+   转发传输的数据不会丢失
+
+4. 转发性能优于重定向
+
+### Cookie和Session
+
+#### Cookie和Session的区别
+
+1. Cookie是服务器发给浏览器的一块信息,存储在浏览器,当浏览器访问这个服务器时会携带这个Cookie.
+
+   Session是存储在服务器的一块信息,用来存储用户的信息.
+
+2. Cookie只能存储String类型
+
+   Session可以存储任意对象
+
+### Jsp
+
+#### Jsp和Servlet的区别
+
+Jsp是html中嵌入Java代码,侧重显示,是MVC中的V,Jsp第一次访问时会被翻译成Servlet
+
+Servlet侧重逻辑控制,是MVC中的C
+
+#### Jsp四大作用域
+
+域对象 : pageContext < request < session < application
+
+作用范围 : 当前页面 < 一次请求 < 当前会话 < 当前web应用
+
+#### Jsp九大内置对象
+
+| 名称          | 类型                  | 描述                |
+| ----------- | ------------------- | ----------------- |
+| request     | HttpServletRequest  | 得到用户请求信息          |
+| response    | HttpServletResponse | 服务器向客户端的回应信息      |
+| session     | HttpSession         | 用来保存用户的信息         |
+| application | ServletContext      | 所有用户的共享信息         |
+| page        | Object              | 当前页面转换后的Servlet实例 |
+| pageContext | PageContext         | JSP的页面容器          |
+| out         | JspWriter           | 用于页面输出            |
+| config      | ServletConfig       | 服务器配置，可以取得初始化参数   |
+| exception   | Throwable           | JSP页面发生的异常，错误页中有效 |
+
+### AJAX
+
+Ajax是一种创建交互式网页应用的网页开发技术
+
+优点 : 
+
+​	使用异步模式,响应速度快
+
+​	实现局部刷新,用户体验好
+
+​	AJAX引擎在客户端运行,分担了服务器压力
+
+缺点 : 
+
+​	不支持浏览器back按钮
