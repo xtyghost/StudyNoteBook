@@ -263,14 +263,14 @@ session.close();
 <!-- false : 维护关系(默认值) -->
 ```
 
-### 多对一配置
+#### 多对一配置
 
 ```xml
 <many-to-one name="属性名" column="外键列名" class="关联类的类名"></many-to-one>
 <!-- 不能配置inverse不维护关系 -->
 ```
 
-### 多对多配置
+#### 多对多配置
 
 ```xml
 <集合类型 name="集合属性名" table="中间表名">
