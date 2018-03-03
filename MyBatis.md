@@ -14,6 +14,7 @@ sqlMapConfig.xml
 
     <!-- 引入Mapper文件 -->
     <mappers>
+      	<mapper resource="mapper文件"/>
       	<!-- 批量引入 --> 
         <package name="包名"/>
     </mappers>
@@ -24,14 +25,36 @@ sqlMapConfig.xml
 
 ```xml
 <mapper namespace="Dao全类名">
+  	<!-- 查询 -->
     <select id="Dao方法名" parameterType="参数类型" resultType="返回值类型">
-        SQL语句 #{value} ${value}
+        select语句
         <where>
             <if test="判断条件">
                 条件语句
             </if>
         </where>
     </select>
+  
+  	<!-- 添加 -->
+  	<insert id="Dao方法名" parameterType="参数类型">
+      	<!-- 返回主键 -->
+      	<selectKey keyProperty="id" resultType="Integer" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+      	insert语句
+  	</insert>
 </mapper>
 ```
 
+### #{}和${}的区别
+
+- \#{}是预编译处理,${}是字符串替换
+- \#{}可以防止SQL注入
+
+### MyBatis的编程步骤
+
+1. 创建SqlSessionFactory
+2. 通过SqlSessionFactory创建SqlSession
+3. 通过SqlSession执行数据库操作
+4. 调用session.commit()方法提交事务
+5. 调用session.close()关闭会话
