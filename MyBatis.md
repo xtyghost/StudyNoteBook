@@ -15,7 +15,7 @@ sqlMapConfig.xml
     <!-- 引入Mapper文件 -->
     <mappers>
       	<mapper resource="mapper文件"/>
-      	<!-- 批量引入 --> 
+      	<!-- 批量引入 要求mapper接口文件与mapper.xml文件同名并在同一包下--> 
         <package name="包名"/>
     </mappers>
 </configuration>
@@ -43,6 +43,16 @@ sqlMapConfig.xml
         </selectKey>
       	insert语句
   	</insert>
+  	
+  	<!-- resultMap配置 -->
+  	<mapper namespace="Dao全类名">
+    <resultMap id="名" type="返回值类型">
+        <id property="对象ID名" column="表中ID名"/>
+        <result property="对象属性名" column="表中字段"/>
+    </resultMap>
+    <select id="Dao方法名" resultMap="名">
+        select语句
+    </select>
 </mapper>
 ```
 
