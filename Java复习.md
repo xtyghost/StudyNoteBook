@@ -436,3 +436,124 @@ MySQL的事务默认是自动提交.
 
 ![SpringMVC](image/SpringMVC.png)
 
+#### SpringMVC常用注解
+
++ @RequestMapping 用于请求URL映射
++ @RequestBody 接受http请求的json数据,转换为Java对象
++ @ResponseBody 将方法返回的对象转换为json响应给客户端
+
+#### 开启注解
+
+在springmvc.xml中配置` <mvc:annotation-driven> `
+
+#### 解决GET和POST乱码问题
+
+##### POST
+
+在web.xml中配置CharacterEncodingFilter过滤器,设置为utf-8
+
+##### GET
+
+1. 修改tomcat配置文件,设置编码为utf-8
+2. 手动重写编码String str = new String(oldStr.getBytes("iso8859-1"), "utf-8");
+
+#### SpringMVC和Struts2的区别
+
+1. SpringMVC是基于Servlet
+
+   Struts2是基于filter
+
+2. SpringMVC是基于方法开发,参数通过方法形参传递
+
+   Struts2是基于类开发,参数通过类属性传递
+
+3. SpringMVC默认是单例,饿汉式
+
+   Struts2是多例
+
+4. SpringMVC是将响应数据封装成ModelAndView
+
+   Struts2是通过值栈存储请求和响应数据
+
+### Spring
+
+#### IOC控制反转
+
+在传统Java开发模式中,当需要一个对象时,我们会使用new或getInstance来直接创建一个对象,而在Spring开发模式中,Spring使用了工厂模式为我们创建了所需要的对象,直接使用就可以了.
+
+#### DI依赖注入
+
+Spring使用JavaBean的set方法或者带参构造函数为创建的对象设置值的过程
+
+#### AOP面向切面编程
+
+将多个对象横向抽成一个切面,可以进行权限控制,事务管理等操作.
+
+AOP底层用动态代理实现,有接口时使用JDK动态代理,没有接口时使用CGLIB代理
+
+#### 开启注解
+
+Spring核心配置文件中配置` <context:annotation-config> `
+
+#### 常用注解
+
++ @Controller
++ @Service
++ @Repository
++ @Autowired 自动装配
++ @Qualifier(对象名) 指定自动装配对象
+
+#### BeanFactory和ApplicationContext区别
+
+**BeanFactory** : 基础类型的IOC容器,默认采用延迟初始化策略
+
+**ApplicationContext** : 在BeanFactory基础上构建,提供了更多功能,容器启动后默认全部初始化并完成绑定
+
+### MyBatis
+
+#### #{}和${}的区别
+
++ \#{}是预编译处理,${}是字符串替换
++ \#{}可以防止SQL注入
+
+#### MyBatis的编程步骤
+
+1. 创建SqlSessionFactory
+2. 通过SqlSessionFactory创建SqlSession
+3. 通过SqlSession执行数据库操作
+4. 调用session.commit()方法提交事务
+5. 调用session.close()关闭会话
+
+#### MyBatis解决JDBC的问题
+
+1. 问题 : 数据库链接释放造成资源浪费
+
+   解决 : MyBatis在配置文件中配置数据库连接池
+
+2. 问题 : 开发中SQL语句可能变化,写在Java代码中不易维护
+
+   解决 : 将SQL语句配置在映射文件中,与Java代码分离
+
+3. 问题 : 向SQL语句中传参麻烦
+
+   解决 : 自动将Java对象映射到SQL语句
+
+4. 问题 : 对结果解析麻烦
+
+   解决 : 自动将SQL执行结果映射到Java对象
+
+#### mapper接口
+
+```xml
+<mapper namespace="接口全类名">
+	<select id="接口方法名" parameterType="接口参数类型" resultType="接口返回值类型">
+      SQL语句 #{value} ${value}
+  </select>
+</mapper>
+```
+
+#### MyBatis和Hibernate区别
+
+MyBatis : 优点入门简单,SQL可控,可以对SQL进行优化
+
+Hibernate : 优点数据库无关性好,ORM映射能力强
