@@ -120,3 +120,84 @@ springmvc配置文件
 </bean>
 ```
 
+### Json交互
+
+```javascript
+$(function(){
+  $.ajax({
+    url: "请求地址",
+    data: json字符串,
+    contenType: "application/json;charset=utf-8",
+    type: "post",
+    dataType: "json",
+    success: function(data){
+      
+    }
+  })
+})
+```
+
+```java
+@RequestMapping("请求地址")
+@ResponseBody
+public 对象类型 方法名(@RequestBody 对象类型 对象名){
+  return 对象名;
+}
+```
+
+### 拦截器
+
+```java
+public class MyInterceptor implements HandlerInterceptor {
+    @Override
+    public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        System.out.println("方法执行前");
+      	// 是否放行
+        return true;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        System.out.println("方法执行后");
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+        System.out.println("视图渲染后");
+    }
+}
+```
+
+```xml
+<mvc:interceptors>
+	<mvc:interceptor>
+      	<!-- 拦截路径 -->
+		<mvc:mapping path="/**"/>
+        <bean class="拦截器全类名"/>
+    </mvc:interceptor>
+</mvc:interceptors>
+```
+
+#### 多个拦截器执行顺序
+
+拦截器1 方法执行前
+
+拦截器2 方法执行前
+
+...
+
+执行方法
+
+...
+
+拦截器2 方法执行后
+
+拦截器1 方法执行后
+
+渲染视图
+
+...
+
+拦截器2 视图渲染后
+
+拦截器1 视图渲染后
