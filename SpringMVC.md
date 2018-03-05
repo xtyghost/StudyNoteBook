@@ -77,3 +77,46 @@ web.xml
 
 + 修改 tomcat 配置文件添加编码与工程编码一致
 + 对参数进行重新编码 ` String userName = new String(Request.getParameter("userName").getBytes("ISO8859-1"),"utf-8"); `
+
+### 异常处理
+
+```java
+public class CustomerException implements HandlerExceptionResolver {
+    @Override
+    public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("msg",e.getMessage());
+        modelAndView.setViewName("exception");
+        return modelAndView;
+    }
+}
+// 在springmvc.xml中配置该类
+```
+
+### 上传文件
+
+jsp
+
+```jsp
+<form id="itemForm"	action="${pageContext.request.contextPath }/updateItem" method="post" enctype="multipart/form-data">
+	<input type="file"  name="名"/>
+</form>
+```
+
+controller类
+
+```java
+public String 方法(MultipartFile 名){
+        
+}
+```
+
+springmvc配置文件
+
+```xml
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+  	<!-- 上传文件最大值 -->
+    <property name="maxUploadSize" value="5000000"/>
+</bean>
+```
+
