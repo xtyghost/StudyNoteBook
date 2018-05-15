@@ -171,6 +171,7 @@ not (列名 is null);
 
 /*查询并对结果排序*/
 order by 列名 可选值 -- 默认升序 可选值: desc降序 asc升序
+order by field(列明,值1,值2...)
 
 /*既有过滤条件又有排序时要后排序*/
 where ... order by ...;
@@ -201,5 +202,19 @@ limit 起始,结束;
 
 /*去重*/
 select distinct 列名1,列名2
+```
+
+```sql
+/* 计算天数差 */
+TIMESTAMPDIFF(DAY,'2012-10-01','2013-01-13')
+DATEDIFF('2013-01-13','2012-10-01')
+/* 计算月份差 */
+TIMESTAMPDIFF(MONTH,'2012-10-01','2013-01-13')
+/* 当前时间 */
+now()
+
+/* 时间戳转换 */
+FROM_UNIXTIME(时间戳)
+UNIX_TIMESTAMP(日期)
 ```
 

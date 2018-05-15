@@ -55,6 +55,25 @@ public class 类名 {
     }
 ```
 
+```java
+// 获取请求参数
+
+// /url/参数值
+@RequestMapping("/url/{参数名}")
+public String 方法(@PathVariable 参数类型 参数名)
+
+// /url?参数名=参数值
+@RequestMapping("/url")
+public String 方法(@RequestParam(参数名) 参数类型 变量名)
+  
+// RequestParam参数
+value 参数名
+required 是否必传(默认true) // 为true时不传会报错:HTTP Status 400 - Required 参数类型 parameter '参数名' is not present
+defaultValue 参数默认值
+```
+
+
+
 ### 解决POST请求乱码
 
 web.xml

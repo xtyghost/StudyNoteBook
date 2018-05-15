@@ -246,7 +246,7 @@ request.getMethod();
 // 2.获取URI
 request.getRequestURI();
 
-// 3.获取URI
+// 3.获取URL
 request.getRequestURL();
 
 // 4.获取web应用名称

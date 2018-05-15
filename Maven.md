@@ -22,3 +22,22 @@
   + site
 
 不同生命周期的命令可以同时执行
+
+```shell
+# 查看版本
+mvn -version
+```
+
+配置阿里云镜像
+
+```xml
+<mirrors>
+	<mirror>
+		<id>nexus-aliyun</id>
+     	<mirrorOf>*</mirrorOf>
+     	<name>Nexus aliyun</name>
+     	<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+	</mirror>
+</mirrors>
+```
+

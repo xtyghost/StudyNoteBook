@@ -319,3 +319,30 @@ void 包名.类名.方法名()
 // 配置后置通知
 @After("execution(execution(切点表达式))")
 ```
+
+### Spring的Java配置方式
+
+```java
+// 表示该类是一个Spring的配置
+@Configuration
+// 配置扫描的包
+@ComponentScan(basePackages = "包名")
+// 读取properties文件
+@PropertySource("classpath:properties文件")
+// 读取多个properties文件
+@PropertySource(value = {"classpath:properties文件1","classpath:properties文件2"})
+// 读取properties文件,忽略不存在文件
+@PropertySource("classpath:properties文件",ignoreResourceNotFound = true)
+public class SpringConfig {
+    // 配置一个bean
+    @Bean
+    public UserDao getUserDao(){
+        return new UserDao();
+    }
+    
+    // 读取properties文件中的值
+    @Value("${名}")
+ 	private String 名;
+}
+```
+

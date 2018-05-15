@@ -8,9 +8,11 @@ tar -xvf redis.tar.gz -C 目标路径
 # 编译
 make
 # 安装
-make PREFIX=文件目录 install
-# 拷贝配置文件
+make PREFIX=安装目录 install
+# 拷贝配置文件到安装目录
 redis.conf
+# 修改配置文件
+daemonize yes
 ```
 
 ### 启动关闭
@@ -43,7 +45,7 @@ decrby 键 自减值 # 指定值自减
 append 键 字符串 # 拼接字符串
 ```
 
-#### 存取hash
+#### 存储hash
 
 ```shell
 hset 键 子键 值 # 设置值
@@ -74,7 +76,27 @@ rpop 键 # 从右边弹出
 
 llen 键 # 获取个数
 
-lrem 键 个数 值 # 从左边删除多个元素
+lrem 键 个数 值 # 删除多个元素 个数>0 从左开始 个数<0 从右开始 个数=0 删除所有
+```
+
+#### 存储Set
+
+```shell
+sadd 键 值1 值2 # 添加
+srem 键 值 # 删除
+smembers 键 # 查询
+
+sdiff 键1 键2 # 取差集 键1 - 键2
+sinter 键1 键2 # 取交集
+sunion 键1 键2 # 取并集
+```
+
+#### 存储ZSet
+
+```shell
+zadd 键 分数1 值1 分数2 值2 # 添加,根据分数排序
+zrang 键 开始范围 结束范围 [withsocres] # 查询指定范围值(0 -1表示全部) 降序
+zrevrang 键 开始范围 结束范围 [withsocres] # 查询指定范围值(0 -1表示全部) 升序
 ```
 
 #### 通用keys操作
@@ -89,6 +111,14 @@ type 键名 # 显示该键类型
 expire 键名 秒数 # 设置过期时间
 persist 键名 # 清除过期时间
 ttl 键名 # 查询过期时间 -1 未设置过期时间 -2 不存在键
+```
+
+#### 数据库操作
+
+```shell
+select 数据库编号 # 切换数据库
+dbsize # 当前数据库key的数量
+flushall # 清空所有数据库的所有key
 ```
 
 ### Redis集群

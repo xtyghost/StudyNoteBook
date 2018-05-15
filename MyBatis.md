@@ -99,3 +99,17 @@ sqlMapConfig.xml
 3. 通过SqlSession执行数据库操作
 4. 调用session.commit()方法提交事务
 5. 调用session.close()关闭会话
+
+### 调用存储过程
+
+```xml
+<select id="setDefaulta" statementType="CALLABLE" parameterType="Map" flushCache="false">
+        <![CDATA[
+        call setDefault(
+        #{luaid,mode=IN,jdbcType=BIGINT},
+        #{uid,mode=IN,jdbcType=INTEGER},
+        #{isdefault,mode=IN,jdbcType=INTEGER})
+        ]]>
+</select>
+```
+

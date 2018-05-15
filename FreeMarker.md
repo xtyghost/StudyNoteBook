@@ -22,6 +22,21 @@ template.process(data,out);
 out.close();
 ```
 
+### SpringBoot中使用
+
+引入依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-freemarker</artifactId>
+</dependency>
+```
+
+controller中返回ModelAndView
+
+
+
 ### FreeMarker语法
 
 ```html

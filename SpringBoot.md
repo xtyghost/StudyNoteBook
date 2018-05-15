@@ -179,3 +179,36 @@ logging:
   	全类名: 日志级别
 ```
 
+### SpringBoot应用
+
+```java
+@Controller
+@Configuration
+@SpringBootApplication
+public class HelloWorldApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HelloWorldApplication.class, args);
+    }
+
+    @RequestMapping("/hello")
+    @ResponseBody
+    public String hello(){
+        return "hello world";
+    }
+}
+```
+
+```java
+// 自动配置,SpringBoot会根据项目中依赖的jar包自动配置
+@EnableAutoConfiguration
+// 默认扫描@SpringBootApplication所在类的同级目录及它的子目录
+@ComponentScan
+```
+
+### 返回Date格式化
+
+```properties
+spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
+spring.jackson.time-zone=GMT+8
+```
+
