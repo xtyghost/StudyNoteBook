@@ -14,3 +14,12 @@ docker stop 容器ID
 docker ps
 ```
 
+```shell
+# 列出本机正在运行的容器
+docker container ls
+# 列出本机所有容器，包括终止运行的容器
+docker container ls --all
+# 删除容器文件
+docker container rm 容器ID
+```
+
