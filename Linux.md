@@ -273,3 +273,10 @@ rpm -e --nodeps 软件名 # 删除
 rpm -qa # 查看
 ```
 
+### ab
+
+```shell
+# http压力测试
+ab -n请求数量 -c并发数量 请求地址
+```
+
