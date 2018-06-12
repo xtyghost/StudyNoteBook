@@ -13,3 +13,15 @@
   + child : 当前节点的子节点引用
     + Znode
     + Znode
+
+```shell
+# 启动
+./zkServer.sh start
+# 查看状态
+./zkServer.sh status
+# 停止
+./zkServer.sh stop
+# 客户端
+./zkCli.sh
+```
+
