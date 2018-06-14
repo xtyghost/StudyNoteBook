@@ -25,3 +25,20 @@
 ./zkCli.sh
 ```
 
+#### zookeeper常用命令
+
+```shell
+ls
+ls2
+get
+stat
+# 创建节点
+create 节点名 节点数据
+-e # 创建临时节点
+-s # 创建顺序节点
+# 修改节点
+set 节点名 节点数据 [节点版本]
+# 删除节点
+delete 节点名 [节点版本]
+```
+

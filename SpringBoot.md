@@ -212,3 +212,9 @@ spring.jackson.date-format=yyyy-MM-dd HH:mm:ss
 spring.jackson.time-zone=GMT+8
 ```
 
+#### 热部署
+
+```xml
+spring-boot-devtools
+```
+
