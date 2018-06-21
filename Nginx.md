@@ -1,5 +1,7 @@
 ### Nginx安装
 
+#### 源码编译安装
+
 ```shell
 # 安装gcc的环境
 yum install gcc-c++
@@ -30,6 +32,25 @@ mkdir /var/temp/nginx/client -p
 make
 # 安装
 make install
+```
+
+#### yum源安装
+
+添加源
+
+/etc/yum.repos.d/nginx.repo
+
+```shell
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/7/$basearch/
+gpgcheck=0
+enabled=1
+```
+
+```shell
+# 安装
+yum install nginx
 ```
 
 ### Nginx启动停止

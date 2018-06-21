@@ -280,3 +280,12 @@ rpm -qa # 查看
 ab -n请求数量 -c并发数量 请求地址
 ```
 
+### SELINUX
+
+```shell
+# 查看selinux状态
+getenforce
+# 关闭selinux
+setenforce 0
+```
+
