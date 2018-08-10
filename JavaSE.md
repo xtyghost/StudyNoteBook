@@ -777,13 +777,83 @@ while判断标记
 
 notifyAll唤醒所有线程
 
-
 #### wait和sleep区别
 
 1. wait可以指定时间也可以不指定
    sleep必须指定时间
 2. wait释放执行权，释放锁
    sleep释放执行权，不释放锁
+
+#### 中断线程
+
+```java
+// 清除中断状态,线程抛出InterruptedException
+interrupt();
+```
+
+#### 守护线程
+
+当其他线程都结束时,守护线程自动结束
+
+```java
+// 设置线程为守护线程
+setDaemon(true);
+```
+
+
+
+#### Lock
+
+```java
+// 创建锁
+Lock lock = new ReentrantLock();
+// 获取监视器
+Condition con = lock.newCondition();
+// 等待
+con.await();
+// 唤醒
+con.signal();
+con.signalAll();
+```
+
+
+
+#### Executors线程池
+
+##### ExecutorService创建
+
+```java
+// 创建固定线程数线程池
+ExecutorService executorService = Executors.newFixedThreadPool(线程数量);
+// 创建缓存大小的线程池
+ExecutorService executorService = Executors.newCachedThreadPool();
+// 创建单一的线程池
+ExecutorService executorService = Executors.newSingleThreadExecutor();
+// 创建延时线程池
+ExecutorService executorService = Executors.newScheduledThreadPool(线程数量);
+```
+
+##### ExecutorService使用
+
+```java
+// 执行
+executorService.execute(实现Runnable接口类);
+// 执行并返回执行结果
+Future future = executorService.submit(实现Runnable接口类);
+```
+
+##### ExecutorService关闭
+
+```java
+// 执行中任务可执行完直到结束
+executorService.shutdown();
+// 任务立即结束
+executorService.shutdownNow();
+```
+
+
+
+
 
 
 ### String类
