@@ -1184,11 +1184,6 @@ void fill(list,obj); 使用指定元素替换所有元素
 3. 通常该集合用于操作以键值对形式存在的配置文件
 
 
-### 网络结构
-
-1. C / S	client / server	客户端和服务端都需要编写
-  2. B / Sbrowser / server  客户端由浏览器取代
-
 ### 反射
 
 #### 获取字节码对象的方式
@@ -1259,3 +1254,14 @@ Constructor, Field, Method都继承AccessibleObject
 isAccessible(true)
 ```
 
+### Lambda表达式
+
+```java
+(参数类型 参数名, ...) -> 方法体;
+// 方法体中有return语句时
+(参数类型 参数名, ...) -> {方法体}
+```
+
+#### 函数式接口
+只定义一个抽象方法的接口
+@FunctionalInterface 
