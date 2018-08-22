@@ -5,8 +5,10 @@
 git init
 # 添加文件到仓库
 git add 文件
-# 提交文件
+# 提交已add文件
 git commit -m "提交说明"
+# 提交已修改文件
+git commit -am "提交说明"
 # 查看仓库状态
 git status
 # 查看文件修改
