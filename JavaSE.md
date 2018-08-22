@@ -1263,5 +1263,10 @@ isAccessible(true)
 ```
 
 #### 函数式接口
+
 只定义一个抽象方法的接口
 @FunctionalInterface 
+
+##### java.util.function包中的函数式接口
+
+
