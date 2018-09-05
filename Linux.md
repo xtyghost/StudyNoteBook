@@ -289,3 +289,10 @@ getenforce
 setenforce 0
 ```
 
+### 后台运行
+
+```shell
+# 不挂断后台运行
+nohup 命令 &
+```
+
