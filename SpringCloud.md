@@ -108,3 +108,19 @@ spring:
 /分支名(默认master)/服务名-环境.格式(yml,properties,json)
 ```
 
+#### ConfigClient
+
+配置 bootstrap.yml
+
+```yaml
+spring:
+  application:
+    name: 项目名
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: 配置中心名
+      profile: 配置名(env)
+```
+
