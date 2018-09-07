@@ -1,6 +1,8 @@
 ### 镜像命令
 
 ```shell
+# 查看版本
+docker version
 # 查看本机所有镜像
 docker image ls
 docker images
@@ -143,4 +145,3 @@ docker-machine ssh 虚拟机名
 # 停止虚拟机
 docker-machine stop 虚拟机名
 ```
-

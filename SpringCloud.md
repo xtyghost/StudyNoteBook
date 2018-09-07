@@ -189,3 +189,56 @@ amqpTemplate.convertAndSend(队列名, 消息内容);
 @RabbitListener(queuesToDeclare = @Queue(队列名))
 ```
 
+### Zuul
+
+路由 + 过滤器 , 核心是一系列的过滤器
+
+#### Zuul的四种过滤器
+
++ 前置 (Pre)
++ 路由 (Route)
++ 后置 (Post)
++ 错误 (Error)
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+</dependency>
+```
+
+启动类注解
+
+```java
+@EnableZuulProxy
+```
+
+#### 路由 
+
+```url
+Zuul地址/服务名/服务接口
+```
+
+##### 自定义路由规则
+
+```yaml
+zuul:
+  routes:
+    # 
+    规则名:
+      path: /路径名/**
+      serviceid: 服务名
+    # 简洁格式
+    服务名: /路径名/**
+```
+
+##### 自定义禁止路由地址
+
+```yaml
+zuul:
+  ignored-patterns:
+    - 路径
+```
+
