@@ -82,6 +82,15 @@ public interface 类名 {
 
 ### ConfigServer统一配置中心
 
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-config-server</artifactId>
+</dependency>
+```
+
 启动类注解
 
 ```java
@@ -108,7 +117,16 @@ spring:
 /分支名(默认master)/服务名-环境.格式(yml,properties,json)
 ```
 
-#### ConfigClient
+### ConfigClient
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-config-client</artifactId>
+</dependency>
+```
 
 配置 bootstrap.yml
 
@@ -122,5 +140,52 @@ spring:
         enabled: true
         service-id: 配置中心名
       profile: 配置名(env)
+```
+
+### SpringCloudBus
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+</dependency>
+```
+
+### RabbitMQ
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+```
+
+配置
+
+```yaml
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+```
+
+使用
+
+```java
+// 发送消息
+@Autowired
+private AmqpTemplate amqpTemplate;
+amqpTemplate.convertAndSend(队列名, 消息内容);
+
+// 接收消息
+@RabbitListener(queues = 队列名)
+// 创建队列并接收消息
+@RabbitListener(queuesToDeclare = @Queue(队列名))
 ```
 
