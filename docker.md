@@ -19,10 +19,13 @@ docker run 参数 镜像名
 --network network名 # 指定network bridge host none
 -v # 目录映射 本机目录:容器目录
 -e # 设置环境变量 环境变量名=环境变量值
+-it # 交互式运行
 # 导出镜像
 docker save -o 导出文件名 镜像名
 # 导入镜像
 docker load -i 导入文件名
+# 查看镜像分层
+docker history 镜像名
 ```
 
 ### 容器命令
@@ -58,7 +61,7 @@ docker cp 文件 容器ID:路径
 #### 使用已有容器构建
 
 ```shell
-# 将容器构建成镜像
+# 将容器构建成镜像(镜像内容不可知,不推荐)
 docker commit 容器名 镜像名
 ```
 
@@ -75,7 +78,7 @@ LABEL version="版本"
 LABEL description="描述"
 # 执行命令,避免无用层,合并多条命令,长命令用\换行
 RUN 执行命令
-# 切换工作目录,没有会自动创建
+# 切换工作目录,没有会自动创建(不要使用RUN cd切换目录, 尽量使用绝对路径)
 WORKDIR 目录
 # 添加本地文件到镜像,自动解压
 ADD 本地文件 目录
@@ -84,7 +87,7 @@ COPY 本地文件 目录
 # 定义常量
 ENV 常量名 常量值
 # 引用常量
-"$常量名"
+"${常量名}"
 # 指定容器启动时默认执行命令,启动时指定其他命令,默认命令会被忽略,有多个CMD时,只执行最后一个
 CMD 执行命令
 # 指定容器启动时一定执行的命令
@@ -93,7 +96,7 @@ ENTRYPOINT 执行命令
 
 ```shell
 # 构建镜像
-docker build -t 镜像名 .
+docker build -t 镜像名 dockerfile目录
 ```
 
 ### 远程仓库
