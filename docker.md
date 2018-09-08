@@ -54,6 +54,8 @@ docker exec -it 容器ID 命令
 docker inspect 容器ID
 # 复制文件到容器
 docker cp 文件 容器ID:路径
+# 查看容器运行日志
+docker logs 容器ID
 ```
 
 ### 构建镜像
