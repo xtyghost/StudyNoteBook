@@ -242,3 +242,87 @@ zuul:
     - 路径
 ```
 
+### SpringCloudHystrix
+
++ 服务降级
++ 依赖隔离
++ 服务熔断
++ 监控
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-hystrix</artifactId>
+</dependency>
+```
+
+启动类注解
+
+```java
+@EnableCircuitBreaker
+```
+
+#### 服务降级
+
+```java
+@HystrixCommand(fallbackMethod = "降级方法名")
+需要降级方法(发生异常时调用降级方法)
+
+降级方法
+```
+
+```java
+@DefaultProperties(defaultFallback = "默认降级方法名")
+需要降级类
+```
+
+```java
+// 配置超时时间
+@HystrixCommand(commandProperties = {
+	@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "超时时间")
+    })
+```
+
+#### 依赖隔离
+
+#### HystrixDashboard
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+</dependency>
+<dependency>
+<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+启动类注解
+
+```java
+@EnableHystrixDashboard
+```
+
+使用
+
+```url
+# 访问HystrixDashboard
+服务地址//hystrix
+```
+
+### 服务追踪
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+```
+
