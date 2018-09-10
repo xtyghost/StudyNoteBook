@@ -296,3 +296,16 @@ setenforce 0
 nohup 命令 &
 ```
 
+### Linux网络命名空间
+
+```shell
+# 查看命名空间
+ip netns list
+# 添加命名空间
+ip netns add 名称
+# 删除命名空间
+ip netns delete 名称
+# 在命名空间中执行命令
+ip netns exec 名称 命令
+```
+
