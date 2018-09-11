@@ -15,8 +15,7 @@ docker pull 镜像名
 docker run 参数 镜像名
 --name 容器名 # 指定容器名
 -d # 后台运行
--p 8080:80 # 本机端口:容器端口 映射
---network network名 # 指定network bridge host none
+-p 本机端口:容器端口 # 端口映射
 -v # 目录映射 本机目录:容器目录
 -e # 设置环境变量 环境变量名=环境变量值
 -it # 交互式运行
@@ -150,3 +149,22 @@ docker-machine ssh 虚拟机名
 # 停止虚拟机
 docker-machine stop 虚拟机名
 ```
+
+### Docker网络
+
+```shell
+# 查看所有network
+docker network ls
+# bridge
+# host
+# none
+
+# 查看network详情
+docker network inspect network名
+
+# 启动时指定network
+--network network名
+# 链接到其他容器
+--link 容器名
+```
+
