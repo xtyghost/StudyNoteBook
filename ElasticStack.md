@@ -35,6 +35,54 @@ GET index/type/_serarch
 }
 ```
 
+### 索引API
+
+```shell
+# 创建索引
+PUT /索引
+# 删除索引
+DELETE /索引
+# 查看索引
+GET _cat/indices
+```
+
+### 文档API
+
+```shell
+# 创建文档
+PUT /索引/类型/文档ID
+{"字段":值}
+# 不指定ID创建文档
+POST /索引/类型
+{"字段":值}
+
+# 根据ID查询文档
+GET /索引/类型/文档ID
+# 查询所有文档
+GET /索引/类型/_search
+
+# 批量操作文档
+POST /_bulk
+# 指令 index update create(文档已存在时报错) delete
+{指令:{"_index":索引,"_type":类型,"_id":文档ID}}
+{"字段":值}
+
+# 批量查询文档
+GET /_mget
+{"docs":[{"_index":索引,"_type":类型,"_id":文档ID}]}
+```
+
+### 分词API
+
+```shell
+# 指定分词器分词
+POST /_analyze
+{"analyzer":分词器,{"text":内容}}
+# 指定字段分词
+POST /索引/_analyze
+{"field":字段,{"text":内容}}
+```
+
 
 
 ## Kibana
