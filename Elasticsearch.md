@@ -19,7 +19,7 @@ network.host: 允许访问IP # (0.0.0.0 所有)
 ```yaml
 cluster.name: 集群名
 node.name: 节点名
-node.master: true # 指定为主节点
+node.master: true # 指定是否可以被选举为主节点
 network.host: 地址
 http.port: 端口
 discovery.zen.ping.unicast.hosts: ["主节点地址"] # 从节点配置

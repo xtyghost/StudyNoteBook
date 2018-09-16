@@ -15,6 +15,8 @@ GET _cat/nodes
 GET _cat/nodes?v
 # 查看集群详情
 GET _cluster/stats
+# 查看集群健康状态
+GET _cluster/health
 ```
 
 ### Query
@@ -186,10 +188,34 @@ GET /索引/_search
 {"query":{
     "match":{"字段名":查询语句}
 }}
+{"query":{
+    "match":{
+    	"字段名":{
+    		"query":查询语句,
+    		"operator":or/and,
+    		# 至少包含字段数
+    		"minimum_should_match":数值
+    }
+}}
 
+# Term Query (不分词)
 GET /索引/_search
 {"query":{
     "term":{"字段":条件}
+}}
+```
+
+### Query DSL复合查询
+
+```shell
+# constant_score query
+GET /索引/_search
+{"query":{
+    "constant_score":{
+        "filter":{
+            "match":{"字段名":查询语句}
+        }
+    }
 }}
 ```
 
