@@ -57,6 +57,14 @@ docker cp 文件 容器ID:路径
 docker logs 容器ID
 ```
 
+#### Data Volume
+
+```shell
+docker volume ls
+docker volume rm
+docker volume inspect
+```
+
 ### 构建镜像
 
 #### 使用已有容器构建

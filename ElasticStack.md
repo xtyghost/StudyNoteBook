@@ -219,6 +219,80 @@ GET /索引/_search
 }}
 ```
 
+### 排序
+
+```shell
+GET /索引/_search
+{
+    "query"{},
+    "sort":{
+        "字段":desc
+    }
+}
+```
+
+### 分页
+
+```shell
+GET /索引/_search
+{
+    "from":开始位置,
+    "size":数量
+}
+```
+
+### Scroll
+
+```shell
+# 获取scroll_id
+GET /索引/_search?scroll=快照有效期
+{"size":数量}
+
+POST _search/scroll
+{
+    "scroll":快照有效期,
+    "scroll_id":scroll_id
+}
+
+# 删除scroll快照
+DELETE _search/scroll
+{"scroll_id":scroll_id}
+DELETE _search/scroll/_all
+```
+
+### Search_After
+
+```shell
+# 指定sort,并保证排序值唯一
+GET /索引/_search
+{
+    "sort":{
+        "字段":desc
+    }
+}
+# Search_After
+GET /索引/_search
+{
+    "search_After":上次返回的sort值
+}
+```
+
+### 聚合分析
+
+```shell
+# Metric聚合分析
+GET /索引/_search
+{
+	# 不返回文档列表
+	"size":0,
+    "aggs":{
+    	"聚合分析名":{
+        	"min/max/avg/sum/cardinality/stats":{"field":字段}
+        }
+    }
+}
+```
+
 
 
 ## Kibana
@@ -245,3 +319,8 @@ elasticsearch.url: elasticsearch地址
 + Packebeat 网络数据
 + Winlogbeat Windows数据
 + Heartbeat 健康检查
+
+## Logstash
+
+### Queue
+
