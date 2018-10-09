@@ -47,3 +47,12 @@ EventEmitter.listenerCount(life, 事件名);
 var isListener = life.emit(事件名, 回调函数参数);
 ```
 
+### express
+
+```shell
+# 安装生成器
+npm i -g express-generator
+# 生成项目
+express 项目名
+```
+
