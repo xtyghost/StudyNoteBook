@@ -33,3 +33,10 @@ db.集合名.update({},{$set:{}})
 db.集合名.remove(条件)
 ```
 
+### 导入导出数据
+
+```shell
+# 导入数据
+mongoimport -d 数据库 -c 集合 --file 文件
+```
+

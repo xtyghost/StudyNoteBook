@@ -56,3 +56,12 @@ npm i -g express-generator
 express 项目名
 ```
 
+### PM2
+
+```shell
+# 安装PM2
+npm i pm2 -g
+# 启动项目
+pm2 start 文件
+```
+
