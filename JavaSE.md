@@ -1183,7 +1183,6 @@ void fill(list,obj); 使用指定元素替换所有元素
 2. 集合中的数据可以保存在流中，或者从流获取
 3. 通常该集合用于操作以键值对形式存在的配置文件
 
-
 ### 反射
 
 #### 获取字节码对象的方式
@@ -1251,7 +1250,7 @@ Constructor, Field, Method都继承AccessibleObject
 
 ```java
 // 取消对象成员默认访问权限检查
-isAccessible(true)
+构造函数.setAccessible(true)
 ```
 
 ### Lambda表达式
@@ -1281,4 +1280,75 @@ isAccessible(true)
 |  `BiConsumer<T,U>`  |  `(T,U)->void`   |
 | `BiFunction<T,U,R>` |   `(T,U,R)->R`   |
 
+### 注解
+
+#### 自定义注解
+
+```java
+// 注解可用位置
+@Target()
+// 注解保存级别
+@Retention
+// 将注解包含在Javadoc中
+@Documented
+// 允许子类继承父类中的注解
+@Inherited
+public @interface 注解名{
+    数据类型 字段名() default 默认值;
+}
+```
+
+##### @Target 注解可用位置
+
+| ElementType     |                                    |
+| --------------- | ---------------------------------- |
+| CONSTRUCTOR     | 构造函数声明                       |
+| FIELD           | 字段(域)声明（包括enum实例）       |
+| LOCAL_VARIABLE  | 局部变量声明                       |
+| METHOD          | 方法声明                           |
+| PACKAGE         | 包声明                             |
+| PARAMETER       | 参数声明                           |
+| TYPE            | 类、接口（包括注解类型）或enum声明 |
+| ANNOTATION_TYPE | 注解声明(应用于另一个注解上)       |
+| TYPE_PARAMETER  | 类型参数声明（1.8新加入）          |
+| TYPE_USE        | 类型使用声明（1.8新加入)           |
+
+##### @Retention 注解保存级别
+
+| RetentionPolicy |                                                            |
+| --------------- | ---------------------------------------------------------- |
+| SOURCE          | 注解将被编译器丢弃                                         |
+| CLASS           | 注解在class文件中可用，但会被VM丢弃                        |
+| RUNTIME         | VM将在运行期间保留注解，因此可以通过反射机制读取注解的信息 |
+
+#### 1.8注解增强
+
+##### @Repeatable 重复注解
+
+```java
+@Repeatable(注解.class)
+public @interface 可重复注解 {
+    String value();
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@interface 注解 {
+    可重复注解[] value();
+}
+```
+
+### 枚举
+
+```java
+// 定义枚举
+enum 枚举名 {
+    值1, 值2, ...
+}
+// 获取枚举所有值
+枚举名.values();
+// 根据枚举值名获取枚举
+枚举名.valueOf(枚举值名);
+// 获取枚举值名
+枚举对象.name();
+```
 
