@@ -35,6 +35,27 @@ SpringCloud是一个开发工具集,包含多个子项目.基于Netflix开源组
 @EnableDiscoveryClient
 ```
 
+配置
+
+```yaml
+eureka:
+  client:
+    service-url:
+      # 默认注册中心地址
+      defaultZone: http://localhost:8761/eureka/
+    # 不注册服务端
+    register-with-eureka: false
+  server:
+    # 关闭上线率过低警告
+    enable-self-preservation: false
+spring:
+  application:
+  	# 服务名
+    name: eureka
+```
+
+
+
 #### 实现高可用
 
 注册中心互相注册,客户端同时注册多个注册中心
@@ -76,7 +97,7 @@ si.getPort()
 @FeignClient(name = 服务名)
 public interface 类名 {
     @GetMapping(路径)
-    方法
+    方法(@RequestParam("参数名") 参数类型 参数名);
 }
 ```
 
@@ -215,7 +236,7 @@ amqpTemplate.convertAndSend(队列名, 消息内容);
 @EnableZuulProxy
 ```
 
-#### 路由 
+#### 路由
 
 ```url
 Zuul地址/服务名/服务接口
@@ -241,6 +262,43 @@ zuul:
   ignored-patterns:
     - 路径
 ```
+
+#### 过滤器
+
+```java
+@Component
+public class 自定义过滤器 extends ZuulFilter {
+    /** 过滤器类型 */
+    @Override
+    public String filterType() {
+        return PRE_TYPE;
+    }
+
+    /** 过滤器排序 */
+    @Override
+    public int filterOrder() {
+        return PRE_DECORATION_FILTER_ORDER - 1;
+    }
+
+    @Override
+    public boolean shouldFilter() {
+        return true;
+    }
+
+    @Override
+    public Object run() {
+        RequestContext requestContext = RequestContext.getCurrentContext();
+        HttpServletRequest request = requestContext.getRequest();
+        
+        requestContext.setSendZuulResponse(false);
+        requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+        
+        return null;
+    }
+}
+```
+
+
 
 ### SpringCloudHystrix
 

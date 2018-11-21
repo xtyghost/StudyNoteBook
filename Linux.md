@@ -309,3 +309,23 @@ ip netns delete 名称
 ip netns exec 名称 命令
 ```
 
+### 端口占用
+
+```shell
+# 根据端口占用查找进程号
+netstat -lnp | grep 端口号 | awk '{print $7}' | awk -F"/" '{print $1}'
+lsof -i :端口号 | awk '{print $2}'
+```
+
+### 时间同步
+
+```shell
+yum install -y ntp \
+&& sed -i "21i server cn.ntp.org.cn prefer" /etc/ntp.conf \
+&& cat /etc/ntp.conf \
+&& service ntpd start \
+&& date \
+&& sleep 5 \
+&& date
+```
+
