@@ -246,8 +246,10 @@ Zuul地址/服务名/服务接口
 
 ```yaml
 zuul:
+  # 全部服务忽略敏感头
+  sensitive-headers:
   routes:
-    # 
+    # 定义路由规则
     规则名:
       path: /路径名/**
       serviceid: 服务名
@@ -280,6 +282,7 @@ public class 自定义过滤器 extends ZuulFilter {
         return PRE_DECORATION_FILTER_ORDER - 1;
     }
 
+    /** 是否拦截 */
     @Override
     public boolean shouldFilter() {
         return true;
@@ -289,10 +292,7 @@ public class 自定义过滤器 extends ZuulFilter {
     public Object run() {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
-        
-        requestContext.setSendZuulResponse(false);
-        requestContext.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
-        
+        HttpServletResponse response = currentContext.getResponse();
         return null;
     }
 }
@@ -325,15 +325,19 @@ public class 自定义过滤器 extends ZuulFilter {
 #### 服务降级
 
 ```java
+// 类默认降级
+@DefaultProperties(defaultFallback = "默认降级方法名")
+需要降级类
+
+@HystrixCommand
+需要降级方法(发生异常时调用默认降级方法)
+    
+默认降级方法
+
 @HystrixCommand(fallbackMethod = "降级方法名")
 需要降级方法(发生异常时调用降级方法)
 
 降级方法
-```
-
-```java
-@DefaultProperties(defaultFallback = "默认降级方法名")
-需要降级类
 ```
 
 ```java
