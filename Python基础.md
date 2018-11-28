@@ -19,6 +19,7 @@
 
 ```python
 #coding=utf-8
+# -*- coding: utf-8 -*-
 ```
 
 ### 变量
@@ -30,12 +31,23 @@
 type(变量名)
 ```
 
-### python关键字
+### 字符串
 
 ```python
-# 查看python关键字
-import keyword
-keyword.kwlist
+# 获取单个字符编码
+ord(字符)
+# 字符编码转换为字符
+chr(编码)
+
+# 字符串转为bytes
+字符串.encode(编码)
+# bytes转为字符串
+bytes.decode(编码)
+
+# 获取字符串长度
+len(字符串)
+# 字符串转换成int
+int(字符串)
 ```
 
 ### 运算符
@@ -50,6 +62,7 @@ keyword.kwlist
 ```python
 # 格式化
 print('%s' %字符串)
+print('%s %d' %(字符串,整数))
 %d 整数
 %f 浮点数
 %s 字符串
@@ -151,6 +164,9 @@ def 函数名(*参数名):
     函数体
 # 关键参数 自动组装为dict
 def 函数名(**参数名):
+    函数体
+# 命名关键字参数
+def 函数名(*, 参数1, 参数2...):
     函数体
 ```
 
