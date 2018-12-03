@@ -17,7 +17,17 @@ sudo service mysqld start
 grep 'temporary password' /var/log/mysqld.log
 ```
 
+#### 修改密码
 
+```sql
+alter user 'root'@'localhost' identified by '新密码'
+```
+
+#### 授权外部访问
+
+```sql
+grant all privileges on *.* to 'root'@'%' identified by '密码' with grant option;
+```
 
 ### 显示信息
 
@@ -31,8 +41,6 @@ select now();
 /*显示当前用户*/
 select user();
 ```
-
-
 
 ### 修改MySQL提示符
 
