@@ -328,4 +328,3 @@ yum install -y ntp \
 && sleep 5 \
 && date
 ```
-

@@ -1,3 +1,24 @@
+### 安装
+
+#### yum安装
+
+```shell
+# 下载仓库 https://dev.mysql.com/downloads/repo/yum/
+# 安装仓库
+rpm -Uvh 仓库文件.rpm
+# 指定版本 修改/etc/yum.repos.d/mysql-community.repo
+enabled=1
+# 安装
+yum install mysql-community-server
+# 启动
+sudo service mysqld start
+
+# 5.7版本查看初始密码
+grep 'temporary password' /var/log/mysqld.log
+```
+
+
+
 ### 显示信息
 
 ```mysql

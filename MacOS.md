@@ -1,3 +1,5 @@
+## 配置环境变量
+
 ### 配置文件
 
 #### 根据Shell不同配置不同文件
@@ -30,5 +32,27 @@ alias jdk8="export JAVA_HOME=$JAVA_8_HOME"
 # 配置maven环境变量
 export MAVEN_HOME=/Users/zhangaochong/Library/apache-maven-3.3.9
 export PATH=$PATH:$MAVEN_HOME/bin
+```
+
+## 其他
+
+### 使用iterm + expect自动连接服务器
+
+```shell
+# 安装expect
+brew install expect
+# 编写脚本
+#!/usr/bin/expect -f
+# 自动登陆服务器脚本
+# 使用: 脚本 用户名 地址 端口 密码
+spawn ssh [lindex $argv 0]@[lindex $argv 1] -p [lindex $argv 2]
+expect {
+	"(yes/no)?"
+	{send "yes\n";exp_continue}
+	"password:"
+	{send "[lindex $argv 3]\r"}
+}
+expect "#" {send "clear\r"}
+interact
 ```
 

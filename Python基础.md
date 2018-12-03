@@ -48,6 +48,9 @@ bytes.decode(编码)
 len(字符串)
 # 字符串转换成int
 int(字符串)
+
+# 原始字符串
+r字符串
 ```
 
 ### 运算符
@@ -110,6 +113,10 @@ len(列表名)
 列表名.pop()
 # 删除指定位置元素
 列表名.pop(位置)
+
+# 迭代
+for 值 in list
+for 索引, 值 in enumerate(list)
 ```
 
 #### tuple(元组)
@@ -133,6 +140,11 @@ tuple与list类似,但不可修改
 键 in 字典
 # 删除键值
 字典名.pop(键)
+
+# 迭代
+for 键 in dict
+for 键 in dict.values()
+for 键, 值 in dict.items()
 ```
 
 #### set
@@ -175,6 +187,7 @@ def 函数名(*, 参数1, 参数2...):
 #### 切片
 
 ```python
+# 取元素
 对象[开始:结束]
 对象[开始:结束:间隔]
 ```
