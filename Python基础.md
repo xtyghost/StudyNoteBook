@@ -160,6 +160,8 @@ set名.remove(值)
 set1 & set2
 # set并集
 set1 | set2
+# set差集
+set1 - set2
 ```
 
 ### 函数

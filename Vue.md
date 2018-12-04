@@ -41,3 +41,69 @@ npm run 启动脚本
   + devDependencies 开发依赖
   + engines node引擎
   + browserslist
+
+### vue-router
+
+#### 动态路由
+
+```javascript
+// 路由模式
+mode: 'history'
+mode: 'hash'
+
+// 配置路由
+path: '/路径/:参数1/路径/:参数2...'
+
+// 获取路由参数
+$route.params.参数名
+// 获取查询参数
+$route.query.参数名
+```
+
+#### 嵌套路由
+
+```javascript
+// 配置子路由
+children: [
+    子路由1,
+    子路由2,
+    ...
+]
+```
+
+```html
+<!-- 跳转子路由 -->
+<router-link to='子路由路径'></router-link>
+
+<!-- 显示子路由 -->
+<router-view></router-view>
+```
+
+#### 编程式路由
+
+```javascript
+// 跳转
+this.$router.push('路径')
+this.$router.go(跳转)
+```
+
+#### 命名路由
+
+```vue
+<router-link v-bind:to='{name: 路由名},params:{参数名:参数值}'></router-link>
+```
+
+#### 命名视图
+
+```javascript
+components: {
+    default: 默认视图,
+    视图: 视图名
+    ...
+}
+```
+
+```vue
+<router-view name=视图名 />
+```
+
