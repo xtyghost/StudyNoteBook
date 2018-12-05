@@ -107,3 +107,17 @@ components: {
 <router-view name=视图名 />
 ```
 
+### vue resource
+
+```shell
+# 安装
+npm i vue-resource --save
+```
+
+```javascript
+this.$http.get(url,{
+    params: {},
+    headers: {}
+}).then()
+```
+

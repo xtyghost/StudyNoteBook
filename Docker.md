@@ -176,3 +176,16 @@ docker network inspect network名
 --link 容器名
 ```
 
+### Docker Compose
+
+#### 安装
+
+```shell
+# 下载
+sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+# 添加执行权限
+sudo chmod +x /usr/local/bin/docker-compose
+# 查看版本
+docker-compose --version
+```
+
