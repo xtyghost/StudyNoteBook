@@ -12,6 +12,8 @@ npm list
 ```shell
 # 安装Vue
 npm install vue --save
+# 安装vue-cli
+npm install -g @vue/cli
 ```
 
 #### 开发步骤
@@ -119,5 +121,43 @@ this.$http.get(url,{
     params: {},
     headers: {}
 }).then()
+```
+
+### 组件拆分
+
+#### 定义组件
+
+```vue
+<template>
+	<div>
+        <!-- 插槽 -->
+        <slot></slot>
+        <slot name='插槽名'></slot>
+    </div>
+</template>
+<script></script>
+<style></style>
+```
+
+#### 导入组件
+
+```vue
+<template>
+  <div>
+    <组件名>
+        <span>传入插槽</span>
+        <span slot='插槽名'></span>
+    </组件名>
+  </div>
+</template>
+<script>
+  import 组件名 from '组件路径'
+  export default {
+    components: {
+      组件名
+    }
+  }
+</script>
+<style></style>
 ```
 

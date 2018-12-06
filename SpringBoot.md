@@ -218,3 +218,29 @@ spring.jackson.time-zone=GMT+8
 spring-boot-devtools
 ```
 
+### SpringScheduled
+
+```java
+// 启动类注解
+@EnableScheduling
+
+// 方法注解
+@Scheduled(参数)
+// 参数
+fixedRate=毫秒 // 调用间隔时间(不等待上一次调用完成)
+fixedDelay=毫秒 // // 上次调用后间隔执行时间
+initialDelay=毫秒 // 初次执行任务之前需要等待的时间
+```
+
+#### cron
+
+```shell
+# 字段含义
+秒 分钟 小时 日 月 星期 年
+# 
+* # 匹配任意值
+值1/值2 # 从值1时间开始,间隔值2时间执行
+值1,值2 # 在值1和值2时间执行
+值1-值2 # 在值1和值2时间内,每时间单位执行一次
+```
+
