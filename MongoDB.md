@@ -1,3 +1,26 @@
+### 安装
+
+```shell
+# 添加源 /etc/yum.repos.d/mongodb-org-4.0.repo
+[mongodb-org-4.0]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/4.0/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-4.0.asc
+
+# 安装
+sudo yum install -y mongodb-org
+# 启动
+service mongod start
+# 停止
+service mongod stop
+# 重启
+service mongod restart
+# 登陆
+mongo
+```
+
 ### 数据库操作
 
 ```shell

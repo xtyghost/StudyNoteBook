@@ -1,3 +1,15 @@
+### Common模块
+
+```javascript
+// 创建模块
+module.exports = {
+    
+}
+
+// 导入模块
+require('模块路径')
+```
+
 ### URL模块
 
 ```javascript
