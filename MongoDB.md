@@ -21,6 +21,42 @@ service mongod restart
 mongo
 ```
 
+### 用户操作
+
+#### 创建用户
+
+```javascript
+use admin
+// 创建用户
+db.createUser({
+    user: "用户名",
+    pwd: "密码",
+    roles: ["权限"]
+})
+// 修改密码
+db.updateUser("用户名", {pwd: "新密码"})
+// 删除用户
+db.system.user.romve({user: "用户名"})
+```
+
+#### 启用用户验证
+
+```shell
+# 修改配置文件 /etc/mongod.conf
+security:
+  authorization: enabled
+# 重启
+```
+
+#### 登陆
+
+```javascript
+use admin
+db.auth("用户名","密码")
+```
+
+
+
 ### 数据库操作
 
 ```shell
