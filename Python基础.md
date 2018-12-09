@@ -213,8 +213,9 @@ for key in 对象
 ### 定义类
 
 ```python
-class 类名():
+class 类名(父类名):
     字段
+    __私有字段
     # 构造函数
     def __init__(self):
        函数体
@@ -229,5 +230,18 @@ class 类名():
     @staticmethod
     def 函数名():
         函数体
+    # 私有函数
+    def __函数名():
+        函数体 
+        
+    # 调用父类方法
+    super(本类名,self).父类方法
+```
+
+### 正则表达式
+
+```python
+import re
+re.findall('正则表达式', 字符串)
 ```
 
