@@ -77,3 +77,10 @@ npm i pm2 -g
 pm2 start 文件
 ```
 
+### mongoose
+
+```shell
+# 安装mongoose
+npm i mongoose --save
+```
+
