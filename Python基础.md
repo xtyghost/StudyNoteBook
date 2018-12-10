@@ -245,3 +245,22 @@ import re
 re.findall('正则表达式', 字符串)
 ```
 
+### json
+
+```python
+import json
+字典 = json.loads(json字符串)
+json字符串 = json.dumps(字典)
+```
+
+### 枚举
+
+```python
+from enum import Enum
+# 定义枚举
+class 枚举名(Enum):
+    name = value
+    
+枚举名(value)
+```
+
