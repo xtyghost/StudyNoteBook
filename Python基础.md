@@ -264,3 +264,31 @@ class 枚举名(Enum):
 枚举名(value)
 ```
 
+### lambda
+
+```python
+lambda 参数:表达式
+```
+
+### 文件读写
+
+```python
+# 获取文件
+文件对象 = open('路径', 标识符, encoding='编码')
+# 自动关流
+with open(open('路径', 标识符) as 文件对象
+r # 读
+w # 写
+b # 二进制
+
+# 读取文件所有内容
+文件对象.read()
+# 读取一行
+文件对象.readline()
+# 读取所有行
+文件对象.readlines()
+
+# 写文件
+文件对象.write(内容)
+```
+
