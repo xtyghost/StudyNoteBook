@@ -139,6 +139,10 @@ sudo yum install -y yum-utils \
 sudo yum-config-manager \
     --add-repo \
     https://download.docker.com/linux/centos/docker-ce.repo
+# 阿里镜像
+sudo yum-config-manager \
+    --add-repo \
+    http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
 #
 sudo yum install docker-ce
 # 启动docker
@@ -197,15 +201,66 @@ docker-compose --version
 #### 配置文件
 
 ```yaml
+version: '3'
 
+services:
+
+  服务名:
+    image: 镜像名
+    ports:
+      -端口映射
+    environment:
+      环境变量
+    networks:
+      - network名
+
+  服务名:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+volumes:
+  mysql-data:
+
+networks:
+  network名:
+    driver: bridge
 ```
-
-
 
 #### 使用
 
 ```shell
 # 启动
 docker-compose -f 配置文件 up
+docker-compose -f 配置文件 up --scale 服务名=数量
+# 查看
+docker-compose ps
+# 停止
+docker-compose stop
+# 停止并删除
+docker-compose down
+# 运行
+docker-compose start
+```
+
+### Docker Swarm
+
+```shell
+# 初始化manager节点
+docker swarm init --advertise-addr=本机IP
+# 加入worker节点
+docker swarm join --token manager节点token manager节点IP:2377
+
+# 显示所有节点
+docker node ls
+
+# 创建service
+docker service create --name 名称 镜像
+# 查看所有service
+docker service ls
+# 修改service数量
+docekr service scale 服务名=数量
+# 查看service运行进程
+docker service ps 服务名
 ```
 
