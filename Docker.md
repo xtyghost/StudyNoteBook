@@ -16,8 +16,8 @@ docker run 参数 镜像名
 --name 容器名 # 指定容器名
 -d # 后台运行
 -p 本机端口:容器端口 # 端口映射
--v # 目录映射 本机目录:容器目录
--e # 设置环境变量 环境变量名=环境变量值
+-v 本机目录:容器目录 # 目录映射
+-e 环境变量名=环境变量值 # 设置环境变量
 -it # 交互式运行
 # 导出镜像
 docker save -o 导出文件名 镜像名
@@ -163,10 +163,15 @@ docker-machine stop 虚拟机名
 ```shell
 # 查看所有network
 docker network ls
+
 # bridge
 # host
 # none
 
+# 创建network
+docker network create -d 类型 名称
+# 连接容器到network
+docker network connect network名 容器名
 # 查看network详情
 docker network inspect network名
 
@@ -187,5 +192,20 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 # 查看版本
 docker-compose --version
+```
+
+#### 配置文件
+
+```yaml
+
+```
+
+
+
+#### 使用
+
+```shell
+# 启动
+docker-compose -f 配置文件 up
 ```
 
