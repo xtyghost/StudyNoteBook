@@ -262,5 +262,7 @@ docker service ls
 docekr service scale 服务名=数量
 # 查看service运行进程
 docker service ps 服务名
+# 删除service
+docker service rm 服务名
 ```
 
