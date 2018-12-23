@@ -69,6 +69,10 @@ git stash pop
 ### 远程仓库命令
 
 ```shell
+# 克隆仓库
+git clone 仓库地址
+# 克隆指定分支
+git clone -b 分支名 仓库地址
 # 查看远程仓库
 git remote -v
 # 推送分支

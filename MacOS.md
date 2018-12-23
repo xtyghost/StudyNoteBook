@@ -34,6 +34,14 @@ export MAVEN_HOME=/Users/zhangaochong/Library/apache-maven-3.3.9
 export PATH=$PATH:$MAVEN_HOME/bin
 ```
 
+### 终端SS代理
+
+```shell
+# 配置终端ss代理
+alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1086"
+alias unsetproxy="unset ALL_PROXY"
+```
+
 ## 其他
 
 ### 使用iterm + expect自动连接服务器
@@ -55,4 +63,3 @@ expect {
 expect "#" {send "clear\r"}
 interact
 ```
-

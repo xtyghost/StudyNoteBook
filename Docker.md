@@ -171,6 +171,7 @@ docker network ls
 # bridge
 # host
 # none
+# overlay
 
 # 创建network
 docker network create -d 类型 名称
