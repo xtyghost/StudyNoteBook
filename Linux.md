@@ -328,3 +328,16 @@ yum install -y ntp \
 && sleep 5 \
 && date
 ```
+
+### dig
+
+```shell
+# 安装
+yum install bind-utils
+# 查询
+dig @DNS地址 域名
+# 反向查询
+dig -x DNS地址
++ short # 返回精简结果
+```
+
