@@ -99,8 +99,40 @@ spring:
       host: consul地址 (默认localhost)
       port: consul端口 (默认8500)
       discovery:
-        healthCheckPath: 健康检查地址 (默认/health)
+        healthCheckPath: 健康检查地址 (默认/health或/actuator/health)
         healthCheckInterval: 间隔时间 (默认10s)
         tags: 标签1, 标签2
+```
+
+### 配置中心
+
+#### 依赖
+
+```xml
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-consul-config</artifactId>
+</dependency>
+```
+
+#### 配置
+
+```yaml
+spring:
+  cloud:
+    consul:
+      config:
+        # 配置文件格式
+        format: yaml
+  profiles:
+    # 指定配置文件
+    active: dev
+```
+
+#### 配置文件
+
+```shell
+# consul KV 路径
+config/项目名,指定配置文件/data
 ```
 

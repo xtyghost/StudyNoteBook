@@ -23,10 +23,12 @@ SpringCloud是一个开发工具集,包含多个子项目.基于Netflix开源组
 + 后端服务(中间层服务)
 + 前端服务(边缘服务)
 
-### SpringCloudEureka
+### Eureka
 
 + EurekaServer 注册中心
-+ EurekaClient 服务注册
++ EurekaClient 客户端
+
+#### 启动类注解
 
 ```java
 // 注册中心
@@ -35,7 +37,7 @@ SpringCloud是一个开发工具集,包含多个子项目.基于Netflix开源组
 @EnableDiscoveryClient
 ```
 
-配置
+#### 配置
 
 ```yaml
 eureka:
@@ -43,7 +45,7 @@ eureka:
     service-url:
       # 默认注册中心地址
       defaultZone: http://localhost:8761/eureka/
-    # 不注册服务端
+    # 不注册到注册中心
     register-with-eureka: false
   server:
     # 关闭上线率过低警告
@@ -53,8 +55,6 @@ spring:
   	# 服务名
     name: eureka
 ```
-
-
 
 #### 实现高可用
 
