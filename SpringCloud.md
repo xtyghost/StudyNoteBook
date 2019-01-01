@@ -174,14 +174,15 @@ spring:
 </dependency>
 ```
 
-### RabbitMQ
+### SpringCloudStream
 
 依赖
 
 ```xml
+<!-- 使用RabbitMQ -->
 <dependency>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-starter-amqp</artifactId>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 </dependency>
 ```
 
@@ -189,25 +190,41 @@ spring:
 
 ```yaml
 spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+  cloud:
+    stream:
+      bindings:
+        消息名(RabbitMQ的Exchange):
+          group: 分组名(RabbitMQ的队列名)
+          # 将java对象序列化为json
+          content-type: application/json
 ```
 
 使用
 
 ```java
-// 发送消息
-@Autowired
-private AmqpTemplate amqpTemplate;
-amqpTemplate.convertAndSend(队列名, 消息内容);
+// 创建接口
+public interface StreamClient {
+    @Input("消息名(RabbitMQ的Exchange)")
+    SubscribableChannel input();
 
-// 接收消息
-@RabbitListener(queues = 队列名)
-// 创建队列并接收消息
-@RabbitListener(queuesToDeclare = @Queue(队列名))
+    @Output("消息名(RabbitMQ的Exchange)")
+    MessageChannel output();
+}
+
+// 接收端
+@Component
+@EnableBinding(StreamClient.class)
+public class StreamReceiver {
+    @StreamListener("消息名(RabbitMQ的Exchange)")
+    // 收到消息后发送消息
+    @SendTo("消息名(RabbitMQ的Exchange)")
+    public String 方法名(消息类型 消息) {
+        return 发送的消息;
+    }
+}
+
+// 发送端
+streamClient.output().send(MessageBuilder.withPayload("消息内容").build());
 ```
 
 ### Zuul
