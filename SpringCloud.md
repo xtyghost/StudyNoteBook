@@ -2,6 +2,8 @@
 
 SpringCloud是一个开发工具集,包含多个子项目.基于Netflix开源组件的进一步封装.
 
+
+
 #### SpingCloud组件
 
 + Eureka 服务发现
@@ -23,12 +25,14 @@ SpringCloud是一个开发工具集,包含多个子项目.基于Netflix开源组
 + 后端服务(中间层服务)
 + 前端服务(边缘服务)
 
+
+
 ### Eureka
 
 + EurekaServer 注册中心
 + EurekaClient 客户端
 
-#### 启动类注解
+启动类注解
 
 ```java
 // 注册中心
@@ -37,7 +41,7 @@ SpringCloud是一个开发工具集,包含多个子项目.基于Netflix开源组
 @EnableDiscoveryClient
 ```
 
-#### 配置
+配置
 
 ```yaml
 eureka:
@@ -56,7 +60,7 @@ spring:
     name: eureka
 ```
 
-#### 实现高可用
+实现高可用
 
 注册中心互相注册,客户端同时注册多个注册中心
 
@@ -72,6 +76,8 @@ si.getHost();
 // 获取服务端口
 si.getPort()
 ```
+
+
 
 ### Feign
 
@@ -100,6 +106,8 @@ public interface 类名 {
     方法(@RequestParam("参数名") 参数类型 参数名);
 }
 ```
+
+
 
 ### ConfigServer统一配置中心
 
@@ -138,7 +146,7 @@ spring:
 /分支名(默认master)/服务名-环境.格式(yml,properties,json)
 ```
 
-### ConfigClient
+#### ConfigClient
 
 依赖
 
@@ -163,6 +171,8 @@ spring:
       profile: 配置名(env)
 ```
 
+
+
 ### SpringCloudBus
 
 依赖
@@ -173,6 +183,8 @@ spring:
 	<artifactId>spring-cloud-starter-bus-amqp</artifactId>
 </dependency>
 ```
+
+
 
 ### SpringCloudStream
 
@@ -226,6 +238,8 @@ public class StreamReceiver {
 // 发送端
 streamClient.output().send(MessageBuilder.withPayload("消息内容").build());
 ```
+
+
 
 ### Zuul
 
@@ -363,6 +377,37 @@ public class 自定义过滤器 extends ZuulFilter {
 	@HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "超时时间")
     })
 ```
+
+#### 服务熔断
+
+```java
+@HystrixCommand(commandProperties = {
+            @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+            @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+    		// 休眠时间窗时间(到期后熔断器进入半开状态)
+            @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+    		// 断路器打开需要的错误百分比
+            @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60")
+    })
+```
+
+#### Feign开启Hystrix
+
+配置
+
+```yaml
+feign:
+  hystrix:
+    enabled: true
+```
+
+使用
+
+```java
+@FeignClient(name = 服务名, 服务降级类.class)
+```
+
+
 
 #### 依赖隔离
 

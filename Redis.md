@@ -184,3 +184,23 @@ JedisCluster jedisCluster = new JedisCluster(nodes);
 jedisCluster.close();
 ```
 
+### 集成SpringBoot
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+```
+
+配置
+
+```yaml
+spring:
+  redis:
+    host: localhost
+    port: 6379
+```
+
