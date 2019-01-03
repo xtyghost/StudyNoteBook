@@ -407,8 +407,6 @@ feign:
 @FeignClient(name = 服务名, 服务降级类.class)
 ```
 
-
-
 #### 依赖隔离
 
 #### HystrixDashboard
@@ -436,10 +434,12 @@ feign:
 
 ```url
 # 访问HystrixDashboard
-服务地址//hystrix
+服务地址/hystrix
 ```
 
 ### 链路监控
+
+#### SpringCloudSleuth
 
 依赖
 
