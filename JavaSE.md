@@ -1268,17 +1268,17 @@ Constructor, Field, Method都继承AccessibleObject
 
 ##### java.util.function包中的函数式接口
 
-|     函数时接口      |    函数描述符    |
+|     函数式接口      |    函数描述符    |
 | :-----------------: | :--------------: |
 |   `Predicate<T>`    |   `T->boolean`   |
 |    `Consumer<T>`    |    `T->void`     |
-|   `Function<T,R>`   |    `T->void`     |
+|   `Function<T,R>`   |      `T->R`      |
 |    `Supplier<T>`    |     `()->T`      |
 | `UnaryOperator<T>`  |      `T->T`      |
 | `BinaryOperator<T>` |    `(T,T)->T`    |
 | `BiPredicate<L,R>`  | `(L,R)->boolean` |
 |  `BiConsumer<T,U>`  |  `(T,U)->void`   |
-| `BiFunction<T,U,R>` |   `(T,U,R)->R`   |
+| `BiFunction<T,U,R>` |    `(T,U)->R`    |
 
 ### 注解
 

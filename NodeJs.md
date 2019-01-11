@@ -59,6 +59,8 @@ EventEmitter.listenerCount(life, 事件名);
 var isListener = life.emit(事件名, 回调函数参数);
 ```
 
+
+
 ### express
 
 ```shell
@@ -68,6 +70,35 @@ npm i -g express-generator
 express 项目名
 ```
 
+#### 路由
+
+app.js
+
+```javascript
+const express = require('express')
+const app = express()
+const 路由 = require('自定义路由')
+app.use('一级路由', 路由)
+```
+
+自定义路由
+
+```javascript
+const express = require('express')
+var router = express.Router()
+
+router.请求方法('二级路由', (req, res, next) => {
+    // 获取请求参数
+    req.param('参数名')
+    // 返回json数据
+    res.json(返回json)
+})
+
+module.exports = router
+```
+
+
+
 ### PM2
 
 ```shell
@@ -75,6 +106,16 @@ express 项目名
 npm i pm2 -g
 # 启动项目
 pm2 start 文件
+# 查看项目
+pm2 list
+# 停止项目
+pm2 stop 项目
+# 重启项目
+pm2 restart 项目
+# 删除项目
+pm2 delete 项目
+# pm2面板
+pm2 monit
 ```
 
 ### mongoose
@@ -82,5 +123,49 @@ pm2 start 文件
 ```shell
 # 安装mongoose
 npm i mongoose --save
+```
+
+#### 连接mongodb
+
+```javascript
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://用户名@地址:27017/数据库名?authSource=admin')
+mongoose.connection.on('connected', () => {
+  console.log('mongodb connected success')
+})
+mongoose.connection.on('error', () => {
+  console.log('mongodb connected fail')
+})
+mongoose.connection.on('disconnected', () => {
+  console.log('mongodb connected disconnected')
+})
+```
+
+#### 定义实体
+
+```javascript
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+const 实体名 = new Schema({
+  '字段名': 字段类型,
+  ···
+})
+
+module.exports = mongoose.model('表名', 实体名)
+```
+
+#### 查询数据
+
+```javascript
+// 简单查询
+实体.find({查询参数}, (err, doc) => {})
+
+// 复杂查询
+// 分页 跳过条数=(pageIndex-1)*pageSize 查询条数=pageSize
+let 查询对象 = 实体.find({}).skip(跳过条数).limit(查询条数)
+// 排序 1 升序 -1 降序
+查询对象.sort({"排序字段":排序})
+// 执行查询
+查询对象.exec((err, doc) => {})
 ```
 

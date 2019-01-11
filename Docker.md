@@ -113,6 +113,8 @@ docker build -t 镜像名 dockerfile目录
 ```shell
 # 登陆docker
 docker login
+# 设置tag
+docker tag 镜像ID 用户名/仓库名:版本
 # 推送镜像到仓库
 docker push 镜像名
 ```

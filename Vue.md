@@ -161,3 +161,14 @@ this.$http.get(url,{
 <style></style>
 ```
 
+### axios
+
+```javascript
+import axios from 'axios'
+axios.get('url', {
+    params: 参数对象
+}).then((res) => {
+    
+})
+```
+

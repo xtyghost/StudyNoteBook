@@ -240,6 +240,8 @@ scp 用户名@主机地址:文件 本地目录
 
 #### 防火墙配置
 
+##### iptables
+
 ```shell
 # 开放3306端口
 /sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT
@@ -251,6 +253,17 @@ scp 用户名@主机地址:文件 本地目录
 service iptables stop
 # 永久关闭,开机不启动防火墙
 chkconfig iptables off
+```
+
+##### firewall
+
+```shell
+# 查看防火墙状态
+firewall-cmd --state
+# 停止防火墙
+systemctl stop firewalld.service
+# 禁止防火墙开机启动
+systemctl disable firewalld.service
 ```
 
 #### rpm安装软件
@@ -339,5 +352,18 @@ dig @DNS地址 域名
 # 反向查询
 dig -x DNS地址
 + short # 返回精简结果
+```
+
+### 修改编码
+
+```shell
+# 修改 /etc/locale.conf
+LANG="zh_CN.UTF-8"
+# 修改 ~/.bashrc
+export LANG='UTF-8'
+export LC_ALL='zh_CN.UTF-8'
+export LC_CTYPE='zh_CN.UTF-8'
+# 刷新配置
+source ~/.bashrc
 ```
 
