@@ -346,3 +346,28 @@ public class SpringConfig {
 }
 ```
 
+### JdbcTemplate
+
+```java
+// 执行SQL
+jdbcTemplate.execute(SQL语句);
+// 查询
+String sql = "select * from 表 where 条件1 = ? and 条件2 = ?";
+RowMapper<实体类> rowMapper = new BeanPropertyRowMapper<>(实体类.class);
+jdbcTemplate.queryForObject(SQL语句, rowMapper, 条件1, 条件2);
+```
+
+### NamedParameterJdbcTemplate
+
+```java
+// 查询
+String sql = "select * from 表 where 条件1 = :条件1 and 条件2 = :条件2";
+
+RowMapper<CourseTest> rowMapper = new BeanPropertyRowMapper<>(CourseTest.class);
+// 使用map传参
+CourseTest courseTest = namedParameterJdbcTemplate.queryForObject(sql, map参数, rowMapper);
+// 使用对象传参
+SqlParameterSource parameter = new BeanPropertySqlParameterSource(对象);
+CourseTest courseTest = namedParameterJdbcTemplate.queryForObject(sql, parameter, rowMapper);
+```
+

@@ -14,6 +14,9 @@ npm list
 npm install vue --save
 # 安装vue-cli
 npm install -g @vue/cli
+
+# 查看可用模版
+vue list
 ```
 
 #### 开发步骤
@@ -135,7 +138,15 @@ this.$http.get(url,{
         <slot name='插槽名'></slot>
     </div>
 </template>
-<script></script>
+<script>
+    export default {
+        // 接收父组件传递的变量
+        props: ["变量名"]
+        
+        // 定义事件
+        this.$emit('事件名', 值)
+    }
+</script>
 <style></style>
 ```
 
@@ -144,7 +155,8 @@ this.$http.get(url,{
 ```vue
 <template>
   <div>
-    <组件名>
+    <!-- 给组件传递变量 监听子组件事件,$event获取值 -->
+    <组件名 变量名="变量值" v-on:事件名="$event">
         <span>传入插槽</span>
         <span slot='插槽名'></span>
     </组件名>
@@ -166,9 +178,31 @@ this.$http.get(url,{
 ```javascript
 import axios from 'axios'
 axios.get('url', {
-    params: 参数对象
+    params: 参数对象,
+    headers: 请求头对象,
+    before: 请求前执行函数
 }).then((res) => {
-    
+    成功回调 
+}).catch((err) => {
+    失败回调
+})
+
+axios.post('url', 参数对象, {
+    headers: 请求头对象
+})
+
+axios({
+    url: 'url',
+    method: 'get',
+    data: 参数对象,
+    headers: 请求头对象
+})
+
+axios({
+    url: 'url',
+    method: 'post',
+    params: 参数对象,
+    headers: 请求头对象
 })
 ```
 

@@ -1,3 +1,17 @@
+### 整合SpringBoot
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.mybatis.spring.boot</groupId>
+	<artifactId>mybatis-spring-boot-starter</artifactId>
+	<version>1.3.2</version>
+</dependency>
+```
+
+
+
 ### 核心配置
 
 sqlMapConfig.xml
