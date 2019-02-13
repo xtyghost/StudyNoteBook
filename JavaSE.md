@@ -851,6 +851,18 @@ executorService.shutdown();
 executorService.shutdownNow();
 ```
 
+#### 自定义线程池
+
+```java
+ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+    10, // 核心线程数, 多的线程放入缓存队列
+    20, // 最大线程数
+    0, // 超过核心线程数的线程空闲超时时间
+    TimeUnit.MICROSECONDS, // 时间单位
+    new LinkedBlockingQueue<>(), // 缓存队列
+    (r) -> new Thread(r, "my-Thread") // 线程工厂);
+```
+
 
 
 
@@ -1350,5 +1362,49 @@ enum 枚举名 {
 枚举名.valueOf(枚举值名);
 // 获取枚举值名
 枚举对象.name();
+```
+
+### J.U.C
+
+#### AQS
+
+##### CountDownLatch
+
+```java
+CountDownLatch count = new CountDownLatch(线程数);
+// 线程执行完调用
+count.countDown();
+
+// 保证后面代码在所有线程执行完执行
+count.await();
+```
+
+##### Semaphore
+
+```java
+Semaphore semaphore = new Semaphore(允许线程数);
+// 获取许可
+semaphore.acquire();
+// 释放许可
+semaphore.release();
+
+// 获取多个许可
+semaphore.acquire(许可数量);
+// 释放多个许可
+semaphore.release(许可数量);
+
+// 尝试获取许可, 获取不到放弃执行
+semaphore.tryAcquire();
+semaphore.tryAcquire(许可数量);
+semaphore.tryAcquire(超时时间, 时间单位);
+```
+
+##### CyclicBarrier
+
+```java
+CyclicBarrier cyclicBarrier = new CyclicBarrier(等待线程数);
+CyclicBarrier cyclicBarrier = new CyclicBarrier(等待线程数, 线程数达到后执行的代码;
+// 线程调用数达到等待线程数后继续执行
+cyclicBarrier.await();
 ```
 

@@ -76,6 +76,10 @@ public class 属性名 {
 @GetMapping(value = "url")
 // 相当于
 @RequestMapping(value = "url", method = RequestMethod.GET)
+
+// 异常处理
+@ExceptionHandler
+public 返回值 方法名(Exception e)
 ```
 
 ```java
@@ -119,18 +123,29 @@ public String 方法(@Valid 对象类型 对象名, BindingResult bindingResult)
 
 #### AOP配置
 
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-aop</artifactId>
+</dependency>
+```
+
+类
+
 ```java
 @Aspect
 @Component
 public class HttpAspect {
     @Before("execution(public * 拦截类.*(..))")
-    public void 方法名()
+    public void 方法名(JoinPoint joinPoint)
       
     @Pointcut("execution(public * 拦截类.*(..))")
     public void 切点方法()
     @Before("切点方法")
     public void 方法名()
-    @after("切点方法")
+    @After("切点方法")
     public void 方法名()
 }
 ```
@@ -177,6 +192,11 @@ logging:
   level: 日志级别
   	# 给单独类设置日志级别
   	全类名: 日志级别
+  	
+spring:
+  output:
+    ansi:
+      enabled: detect # detect always never
 ```
 
 ### SpringBoot应用

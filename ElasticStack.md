@@ -7,6 +7,20 @@
 
 ## Elasticsearch
 
+#### 配置
+
+```yaml
+# config/elasticsearch.yml
+cluster.name: 集群名
+node.name: 当前节点名
+node.master: true # 指定为主节点
+network.host: 127.0.0.1 # 监听地址
+http.port: 9200
+
+# 启动时指定参数
+-Ehttp.port=9200 -Epath.data=数据路径
+```
+
 ### 集群
 
 ```shell
@@ -19,18 +33,25 @@ GET _cluster/stats
 GET _cluster/health
 ```
 
-### Query
+### Elasticsearch Query
 
 ```shell
 # QueryString
-GET index/type/_search?q=value
+GET /索引/类型/_search
+# 请求参数
+q 查询条件:查询字段
+df 查询字段
+sort 排序字段:asc
+from 页数
+size 每页条数
+
 # QueryDSL
-GET index/type/_serarch
+GET /索引/类型/_search
 {
     "query": {
         "term": {
-            filed: {
-                "value": value
+            字段: {
+                "value": 查询条件
             }
         }
     }
@@ -54,14 +75,15 @@ GET _cat/indices
 # 创建文档
 PUT /索引/类型/文档ID
 {"字段":值}
-# 不指定ID创建文档
-POST /索引/类型
+
+POST /索引/类型/文档ID(不指定默认生成)
 {"字段":值}
 
 # 根据ID查询文档
 GET /索引/类型/文档ID
-# 查询所有文档
-GET /索引/类型/_search
+
+# 删除文档
+DELETE /索引/类型/文档ID
 
 # 批量操作文档
 POST /_bulk
@@ -69,7 +91,7 @@ POST /_bulk
 {指令:{"_index":索引,"_type":类型,"_id":文档ID}}
 {"字段":值}
 
-# 批量查询文档
+# 批量指定ID查询文档
 GET /_mget
 {"docs":[{"_index":索引,"_type":类型,"_id":文档ID}]}
 ```
@@ -109,6 +131,8 @@ PUT /索引
         "properties":{
             "字段":{
                 "type":类型,
+                # 不建立索引
+                "index": false,
                 "null_value":默认值
             }
         }
@@ -293,14 +317,34 @@ GET /索引/_search
 }
 ```
 
+### SpringBoot集成
 
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+</dependency>
+```
+
+配置
+
+```yaml
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 127.0.0.1:9300
+```
 
 ## Kibana
 
 ### 配置
 
-```shell
-elasticsearch.url: elasticsearch地址
+```yaml
+# config/kibana.yml
+server.port: 5601
+elasticsearch.url:  "http://elasticsearch地址"
 ```
 
 ### 常用功能
