@@ -20,6 +20,14 @@
                    +----------------------------+
 ```
 
+##### Virtual host
+
+虚拟地址, 最上层消息路由, 一个Virtual host里面有多个Exchange和Queue, 同一个Virtual host里面不能有同名Exchange和Queue
+
+##### Exchange
+
+交换机, 接收消息, 根据路由键转发消息到绑定的Queue
+
 ### SpringBoot集成
 
 依赖

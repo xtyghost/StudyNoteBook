@@ -58,6 +58,22 @@ public class 属性名 {
 }
 ```
 
+#### 加载自定义yaml配置文件
+
+```java
+@Bean
+public static PropertySourcesPlaceholderConfigurer properties() {
+	PropertySourcesPlaceholderConfigurer configurer = new PropertySourcesPlaceholderConfigurer();
+    YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
+    // 使用文件路径
+    yaml.setResources(new FileSystemResource("配置文件.yml"));
+    // 使用classpath
+	yaml.setResources(new ClassPathResource("配置文件.yml"));
+    configurer.setProperties(yaml.getObject());
+    return configurer;
+}
+```
+
 ### 注解配置
 
 #### Controller类配置
@@ -262,5 +278,44 @@ initialDelay=毫秒 // 初次执行任务之前需要等待的时间
 值1/值2 # 从值1时间开始,间隔值2时间执行
 值1,值2 # 在值1和值2时间执行
 值1-值2 # 在值1和值2时间内,每时间单位执行一次
+```
+
+### SpringCache
+
+注解
+
+```java
+// 启动类注解
+@EnableCaching
+// 存入缓存
+@Cacheable(value = "缓存名", key = "#键")
+// 删除缓存
+@CacheEvict(value = "缓存名", key = "#键")
+```
+
+### 注入Bean
+
+方法一
+
+```java
+@Configuration
+public class 配置类 {
+    @Bean
+    public 注入类 对象名() {
+        return new 注入类();
+    }
+}
+```
+
+方法二
+
+```java
+@Component
+public class 注入类 {
+    @Value("值")
+    private 字段类型 字段名;
+    
+    get/set
+}
 ```
 

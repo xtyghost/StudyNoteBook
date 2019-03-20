@@ -61,6 +61,10 @@ cp 源文件或目录 目标目录
 -d # 若源文件是连接文件，则复制链接属性
 -a # 相当于 -pdr
 -v # 显示复制进度
+
+# 查找
+find 查找路径 -name 文件名
+find 查找路径 -iname 文件名忽略大小写
 ```
 
 #### 常用目录
@@ -187,6 +191,14 @@ grep 参数 字符串 文件名
 -i # 忽略大小写
 -v # 取反
 ```
+
+#### awk
+
+```shell
+awk -F "指定分隔符" '条件 {指令}' 文件名
+```
+
+
 
 #### 查看当前端口使用
 
@@ -365,5 +377,16 @@ export LC_ALL='zh_CN.UTF-8'
 export LC_CTYPE='zh_CN.UTF-8'
 # 刷新配置
 source ~/.bashrc
+```
+
+### Shell
+
+```shell
+# 显示当前shell
+echo $SHELL
+# 查看支持的shell
+cat /etc/shells
+# 切换shell
+chsh -s shell名
 ```
 

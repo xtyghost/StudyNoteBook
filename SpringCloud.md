@@ -247,10 +247,16 @@ streamClient.output().send(MessageBuilder.withPayload("消息内容").build());
 
 #### Zuul的四种过滤器
 
-+ 前置 (Pre)
-+ 路由 (Route)
-+ 后置 (Post)
++ 前置 (Pre) (2.0 Inbound)
++ 路由 (Route) (2.0 Endpoint)
++ 后置 (Post) (2.0 Outbound)
 + 错误 (Error)
+
+#### Zuul1.0 Zuul2.0区别
+
+Zuul1.0: 基于Servlet, 同步调用
+
+Zuul2.0: 基于Netty, 异步调用, 支持HTTP/2
 
 依赖
 

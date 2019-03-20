@@ -233,6 +233,15 @@ limit 起始,结束;
 select distinct 列名1,列名2
 ```
 
+### 索引
+
+```sql
+/* 添加索引 */
+alter table 表名 add index 索引名(字段名)
+```
+
+### 时间计算
+
 ```sql
 /* 计算天数差 */
 TIMESTAMPDIFF(DAY,'2012-10-01','2013-01-13')
@@ -246,3 +255,26 @@ now()
 FROM_UNIXTIME(时间戳)
 UNIX_TIMESTAMP(日期)
 ```
+
+### 查询优化
+
+#### Explain
+
+```sql
+/* 分析查询语句 */
+explain sql语句
+
+/* 返回字段 */
+type字段
+system > const > eq_ref > ref > fulltext > ref_or_null > index_mearge > unique_subquery > index_subquery > range > index > all
+```
+
+### 事物隔离级别
+
+| 事物隔离级别 | 脏读 | 不可重复读 | 幻读 |
+| :----------: | :--: | :--------: | :--: |
+|   读未提交   | 发生 |    发生    | 发生 |
+|   读已提交   |      |    发生    | 发生 |
+|   可重复读   |      |            | 发生 |
+|    串行化    |      |            |      |
+

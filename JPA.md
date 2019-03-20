@@ -43,3 +43,20 @@ public interface dao名 extends JpaRepository<实体类, 主键类型> {
 }
 ```
 
+#### 复杂查询
+
+```java
+public interface dao名 extends JpaRepository<实体类, 主键类型>, JpaSpecificationExecutor<实体类> {
+}
+
+List<实体类> 返回值 = dao名.findAll((root, query, cb) -> {
+    // =
+    Predicate p1 = cb.equal(root.get("查询字段"), 条件值);
+    // >
+    Predicate p2 = cb.gt(root.get("查询字段"), 条件值);
+    // and
+    Predicate p3 = cb.and(p1, p2);
+    return query.where(p3).getRestriction();
+});
+```
+

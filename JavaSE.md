@@ -838,8 +838,10 @@ ExecutorService executorService = Executors.newScheduledThreadPool(线程数量)
 ```java
 // 执行
 executorService.execute(实现Runnable接口类);
-// 执行并返回执行结果
+// 执行并返回
 Future future = executorService.submit(实现Runnable接口类);
+// 执行并返回执行结果
+Future future = executorService.submit(实现Callable接口类);
 ```
 
 ##### ExecutorService关闭
@@ -855,11 +857,11 @@ executorService.shutdownNow();
 
 ```java
 ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
-    10, // 核心线程数, 多的线程放入缓存队列
-    20, // 最大线程数
-    0, // 超过核心线程数的线程空闲超时时间
+    corePoolSize, // 核心线程数, 多的线程放入缓存队列
+    maximumPoolSize, // 最大线程数
+    keepAliveTime, // 超过核心线程数的线程空闲超时时间
     TimeUnit.MICROSECONDS, // 时间单位
-    new LinkedBlockingQueue<>(), // 缓存队列
+    new LinkedBlockingQueue<>(), // 存储等待执行线程队列
     (r) -> new Thread(r, "my-Thread") // 线程工厂);
 ```
 
@@ -1368,14 +1370,16 @@ enum 枚举名 {
 
 #### AQS
 
+AbstractQueuedSynchronizer
+
 ##### CountDownLatch
 
 ```java
-CountDownLatch count = new CountDownLatch(线程数);
-// 线程执行完调用
+CountDownLatch count = new CountDownLatch(计数);
+// 计数减1
 count.countDown();
 
-// 保证后面代码在所有线程执行完执行
+// 计数为0时获取到锁
 count.await();
 ```
 

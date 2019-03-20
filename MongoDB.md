@@ -87,9 +87,11 @@ db.集合名.insert({列,值})
 # 查询数据
 db.集合名.find(条件)
 # 修改数据
-db.集合名.update({},{$set:{}})
+db.集合名.update(条件,{$set:{}})
 # 删除数据
 db.集合名.remove(条件)
+# 查询数量
+db.集合名.count(条件)
 ```
 
 ### 导入导出数据
@@ -97,5 +99,33 @@ db.集合名.remove(条件)
 ```shell
 # 导入数据
 mongoimport -d 数据库 -c 集合 --file 文件
+```
+
+### SpringDataMongoDB
+
+依赖
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-mongodb</artifactId>
+</dependency>
+```
+
+配置
+
+```yaml
+spring:
+  data:
+    mongodb:
+      host: localhost:27017
+      database: 数据库
+```
+
+使用
+
+```java
+public interface dao层 extends MongoRepository<实体类, 主键> {
+}
 ```
 
